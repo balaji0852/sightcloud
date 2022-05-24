@@ -1,6 +1,7 @@
 package com.sight.sightcloud.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "classmaster")
@@ -23,6 +24,9 @@ public class ClassMaster {
     private int isItemCommentable;
 
     private String description;
+
+    @OneToMany(mappedBy = "classMaster")
+    private Set<DataInstanceMaster> dataInstanceMasterSet;
 
     public int getItemMasterID() {
         return itemMasterID;

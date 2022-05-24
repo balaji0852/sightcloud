@@ -34,7 +34,17 @@ public class classMasterController {
         Boolean responseFlag = classMasterService.deleteClassMaster(itemMasterID);
 
         if(responseFlag)
-            return (ResponseEntity<String>) ResponseEntity.status(HttpStatus.OK).body("success");
+            return ResponseEntity.status(HttpStatus.OK).body("success");
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("oops");
+    }
+
+    @PutMapping("/api/classMaster")
+    public ResponseEntity<String> updateClassMaster(@RequestBody ClassMaster classMaster){
+        Boolean responseFlag = classMasterService.updateClassMaster(classMaster);
+
+        if(responseFlag)
+            return ResponseEntity.status(HttpStatus.OK).body("success");
 
         return ResponseEntity.status(HttpStatus.REQUEST_TIMEOUT).body("oops");
     }

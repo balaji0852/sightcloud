@@ -36,4 +36,13 @@ public class classMasterService {
         return  false;
     }
 
+    public Boolean updateClassMaster(ClassMaster classMaster){
+        if(classMasterRepository.existsById(classMaster.getItemMasterID())){
+            classMasterRepository.save(classMaster);
+            return true;
+        }
+
+        return  false;
+    }
+
 }
