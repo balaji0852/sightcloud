@@ -1,5 +1,6 @@
 package com.sight.sightcloud.service;
 
+import com.sight.sightcloud.model.ClassMaster;
 import com.sight.sightcloud.model.DataInstanceMaster;
 import com.sight.sightcloud.repository.DataInstanceMasterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,14 @@ public class DataInstanceService {
         }
 
         return false;
+    }
+
+    public Boolean deleteDataInstanceMaster(int dataInstanceID){
+        DataInstanceMaster dataInstanceMaster = dataInstanceMasterRepository.getById(dataInstanceID);
+        if(dataInstanceMasterRepository.existsById(dataInstanceID)){
+            dataInstanceMasterRepository.delete(dataInstanceMaster);
+            return  true;
+        }
+        return  false;
     }
 }

@@ -5,10 +5,7 @@ import com.sight.sightcloud.model.DataInstanceMaster;
 import com.sight.sightcloud.service.DataInstanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,8 +23,19 @@ public class DataInstanceMasterController {
 
     @PostMapping(path = "/api/dataInstanceMaster")
     public ResponseEntity insertDataInstanceMaster(@RequestBody DataInstanceMaster dataInstanceMaster){
+        //dataInstanceMaster.setDataInstanceID(3);
         boolean responseFlag = dataInstanceService.insertDataInstanceMaster(dataInstanceMaster);
 
+        if(responseFlag){
+            return ResponseEntity.status(200).body("success");
+        }
+
+        return ResponseEntity.status(500).body("internal service error");
+    }
+
+    @DeleteMapping(path = "/api/dataInstanceMaster/{dataInstanceID}")
+    public ResponseEntity deleteDataInstanceMaster(@PathVariable int dataInstanceID){
+        boolean responseFlag = dataInstanceService.deleteDataInstanceMaster(dataInstanceID);
         if(responseFlag){
             return ResponseEntity.status(200).body("success");
         }
