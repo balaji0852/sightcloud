@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DataInstanceService {
@@ -40,5 +41,13 @@ public class DataInstanceService {
             return  true;
         }
         return  false;
+    }
+
+    public List<DataInstanceMaster> findDataInstanceByOneInterval(int dateTimeEpoch, int zeroDateTimeEpoch, int itemMasterID){
+        return dataInstanceMasterRepository.findDataInstanceByOneInterval(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID);
+    }
+
+    public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMaster(int dateTimeEpoch, int zeroDateTimeEpoch){
+        return dataInstanceMasterRepository.findDataInstanceByIntervalWithClassMaster(dateTimeEpoch,zeroDateTimeEpoch);
     }
 }

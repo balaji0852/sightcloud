@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class DataInstanceMasterController {
@@ -22,7 +23,7 @@ public class DataInstanceMasterController {
 
 
     @PostMapping(path = "/api/dataInstanceMaster")
-    public ResponseEntity insertDataInstanceMaster(@RequestBody DataInstanceMaster dataInstanceMaster){
+    public ResponseEntity<String> insertDataInstanceMaster(@RequestBody DataInstanceMaster dataInstanceMaster){
         //dataInstanceMaster.setDataInstanceID(3);
         boolean responseFlag = dataInstanceService.insertDataInstanceMaster(dataInstanceMaster);
 
@@ -34,12 +35,22 @@ public class DataInstanceMasterController {
     }
 
     @DeleteMapping(path = "/api/dataInstanceMaster/{dataInstanceID}")
-    public ResponseEntity deleteDataInstanceMaster(@PathVariable int dataInstanceID){
+    public ResponseEntity<String> deleteDataInstanceMaster(@PathVariable int dataInstanceID){
         boolean responseFlag = dataInstanceService.deleteDataInstanceMaster(dataInstanceID);
         if(responseFlag){
             return ResponseEntity.status(200).body("success");
         }
 
         return ResponseEntity.status(500).body("internal service error");
+    }
+
+    @GetMapping(path = "/api/dataInstanceMaster/query1")
+    public List<DataInstanceMaster> findDataInstanceByOneInterval(@RequestParam int dateTimeEpoch,@RequestParam int zeroDateTimeEpoch,@RequestParam int itemMasterID){
+        return dataInstanceService.findDataInstanceByOneInterval(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID);
+    }
+
+    @GetMapping(path = "/api/dataInstanceMaster/query2")
+    public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMaster(@RequestParam int dateTimeEpoch,@RequestParam int zeroDateTimeEpoch){
+        return dataInstanceService.findDataInstanceByIntervalWithClassMaster(dateTimeEpoch,zeroDateTimeEpoch);
     }
 }

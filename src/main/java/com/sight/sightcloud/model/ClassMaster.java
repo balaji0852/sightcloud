@@ -25,7 +25,7 @@ public class ClassMaster {
 
     private String description;
 
-    @OneToMany(mappedBy = "classMaster")
+    @OneToMany(mappedBy = "classMaster",cascade = CascadeType.ALL   )
     private Set<DataInstanceMaster> dataInstanceMasterSet;
 
     public int getItemMasterID() {
