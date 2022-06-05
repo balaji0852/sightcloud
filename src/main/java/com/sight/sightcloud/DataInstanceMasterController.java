@@ -1,7 +1,9 @@
 package com.sight.sightcloud;
 
 
+import com.sight.sightcloud.model.ClassMaster;
 import com.sight.sightcloud.model.DataInstanceMaster;
+import com.sight.sightcloud.model.dataInstanceMasterVO;
 import com.sight.sightcloud.service.DataInstanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +26,11 @@ public class DataInstanceMasterController {
 
 
     @PostMapping(path = "/api/dataInstanceMaster")
-    public ResponseEntity<String> insertDataInstanceMaster(@RequestBody DataInstanceMaster dataInstanceMaster){
-        //dataInstanceMaster.setDataInstanceID(3);
+    public ResponseEntity<String> insertDataInstanceMaster(@RequestBody dataInstanceMasterVO dataInstanceMasterVO){
+        DataInstanceMaster dataInstanceMaster = new DataInstanceMaster();
+        dataInstanceMaster.setDataInstances(dataInstanceMasterVO.getDataInstances());
+        dataInstanceMaster.setInstanceTime(Integer.parseInt(dataInstanceMasterVO.getInstanceTime()));
+        dataInstanceMaster.setClassMaster(dataInstanceMasterVO.getClassMaster());
         boolean responseFlag = dataInstanceService.insertDataInstanceMaster(dataInstanceMaster);
 
         if(responseFlag){
