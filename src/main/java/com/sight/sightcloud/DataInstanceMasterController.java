@@ -29,7 +29,7 @@ public class DataInstanceMasterController {
     public ResponseEntity<String> insertDataInstanceMaster(@RequestBody dataInstanceMasterVO dataInstanceMasterVO){
         DataInstanceMaster dataInstanceMaster = new DataInstanceMaster();
         dataInstanceMaster.setDataInstances(dataInstanceMasterVO.getDataInstances());
-        dataInstanceMaster.setInstanceTime(Integer.parseInt(dataInstanceMasterVO.getInstanceTime()));
+        dataInstanceMaster.setInstanceTime(Long.parseLong(dataInstanceMasterVO.getInstanceTime()));
         dataInstanceMaster.setClassMaster(dataInstanceMasterVO.getClassMaster());
         boolean responseFlag = dataInstanceService.insertDataInstanceMaster(dataInstanceMaster);
 
