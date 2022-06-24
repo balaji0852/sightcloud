@@ -21,10 +21,16 @@ public interface DataInstanceMasterRepository extends JpaRepository<DataInstance
 //      User findUserByStatusAndName(Integer status, String name);
 //
     @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.instanceTime>=?1 and d.instanceTime<=?2 and d.classMaster.itemMasterID=?3 ")
-    List<DataInstanceMaster> findDataInstanceByOneInterval(int dateTimeEpoch, int zeroDateTimeEpoch, int itemMasterID);
+    List<DataInstanceMaster> findDataInstanceByOneInterval(Long dateTimeEpoch,Long zeroDateTimeEpoch, int itemMasterID);
 
     @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.instanceTime>=?1 and d.instanceTime<=?2")
-    List<DataInstanceMaster> findDataInstanceByIntervalWithClassMaster(int dateTimeEpoch, int zeroDateTimeEpoch);
+    List<DataInstanceMaster> findDataInstanceByIntervalWithClassMaster(Long dateTimeEpoch,Long zeroDateTimeEpoch);
+
+    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.instanceTime>=?1 and d.instanceTime<=?2 and d.classMaster.itemMasterID=?3  and d.instancesStatus=?4")
+    List<DataInstanceMaster> findDataInstanceByOneIntervalV1(Long dateTimeEpoch,Long zeroDateTimeEpoch, int itemMasterID,int instancesStatus);
+
+    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.instanceTime>=?1 and d.instanceTime<=?2 and d.instancesStatus=?3")
+    List<DataInstanceMaster> findDataInstanceByIntervalWithClassMasterV1(Long dateTimeEpoch,Long zeroDateTimeEpoch,int instanceStatus);
 
 
 }

@@ -5,6 +5,7 @@ import com.sight.sightcloud.model.DataInstanceMaster;
 import com.sight.sightcloud.repository.DataInstanceMasterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,11 +44,19 @@ public class DataInstanceService {
         return  false;
     }
 
-    public List<DataInstanceMaster> findDataInstanceByOneInterval(int dateTimeEpoch, int zeroDateTimeEpoch, int itemMasterID){
+    public List<DataInstanceMaster> findDataInstanceByOneInterval(Long dateTimeEpoch, Long zeroDateTimeEpoch, int itemMasterID){
         return dataInstanceMasterRepository.findDataInstanceByOneInterval(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID);
     }
 
-    public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMaster(int dateTimeEpoch, int zeroDateTimeEpoch){
+    public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMaster(Long dateTimeEpoch, Long zeroDateTimeEpoch){
         return dataInstanceMasterRepository.findDataInstanceByIntervalWithClassMaster(dateTimeEpoch,zeroDateTimeEpoch);
+    }
+
+    public List<DataInstanceMaster> findDataInstanceByOneIntervalV1(Long dateTimeEpoch, Long zeroDateTimeEpoch, int itemMasterID,int instancesStatus){
+        return dataInstanceMasterRepository.findDataInstanceByOneIntervalV1(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID,instancesStatus);
+    }
+
+    public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMasterV1(Long dateTimeEpoch,Long zeroDateTimeEpoch,int instancesStatus){
+        return dataInstanceMasterRepository.findDataInstanceByIntervalWithClassMasterV1(dateTimeEpoch,zeroDateTimeEpoch,instancesStatus);
     }
 }

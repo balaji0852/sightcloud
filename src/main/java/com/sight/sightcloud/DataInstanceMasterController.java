@@ -44,12 +44,22 @@ public class DataInstanceMasterController {
     }
 
     @GetMapping(path = "/api/dataInstanceMaster/query1")
-    public List<DataInstanceMaster> findDataInstanceByOneInterval(@RequestParam int dateTimeEpoch,@RequestParam int zeroDateTimeEpoch,@RequestParam int itemMasterID){
+    public List<DataInstanceMaster> findDataInstanceByOneInterval(@RequestParam Long dateTimeEpoch,@RequestParam Long zeroDateTimeEpoch,@RequestParam int itemMasterID){
         return dataInstanceService.findDataInstanceByOneInterval(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID);
     }
 
     @GetMapping(path = "/api/dataInstanceMaster/query2")
-    public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMaster(@RequestParam int dateTimeEpoch,@RequestParam int zeroDateTimeEpoch){
+    public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMaster(@RequestParam Long dateTimeEpoch,@RequestParam Long zeroDateTimeEpoch){
         return dataInstanceService.findDataInstanceByIntervalWithClassMaster(dateTimeEpoch,zeroDateTimeEpoch);
+    }
+
+    @GetMapping(path = "/api/dataInstanceMaster/status/query1")
+    public List<DataInstanceMaster> findDataInstanceByOneIntervalV1(@RequestParam Long dateTimeEpoch,@RequestParam Long zeroDateTimeEpoch,@RequestParam int itemMasterID,@RequestParam int instanceStatus){
+        return dataInstanceService.findDataInstanceByOneIntervalV1(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID,instanceStatus);
+    }
+
+    @GetMapping(path = "/api/dataInstanceMaster/status/query2")
+    public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMasterV1(@RequestParam Long dateTimeEpoch,@RequestParam Long zeroDateTimeEpoch,@RequestParam int instanceStatus){
+        return dataInstanceService.findDataInstanceByIntervalWithClassMasterV1(dateTimeEpoch,zeroDateTimeEpoch,instanceStatus);
     }
 }

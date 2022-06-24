@@ -27,6 +27,8 @@ public class DataInstanceMaster {
 
     private long instanceTime;
 
+    private int instancesStatus;
+
 
     public int getDataInstanceID() {
         return dataInstanceID;
@@ -58,5 +60,13 @@ public class DataInstanceMaster {
 
     public void setInstanceTime(long instanceTime) {
         this.instanceTime = instanceTime;
+    }
+
+    public int getInstancesStatus() {
+        return instancesStatus;
+    }
+
+    public void setInstancesStatus(int instancesStatus) {
+        this.instancesStatus = instancesStatus;
     }
 }
