@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class classMasterController {
@@ -17,6 +18,12 @@ public class classMasterController {
     @GetMapping("/api/classMaster")
     public List<ClassMaster> getAllClassMaster() {
         return classMasterService.getClassMaster();
+    }
+
+
+    @GetMapping("/api/classMaster")
+    public Optional<ClassMaster> getAllByProjectStoreID(@RequestBody int projectStoreID) {
+        return classMasterService.findClassMasterByProjectStoreID(projectStoreID);
     }
 
     @PostMapping("/api/classMaster")

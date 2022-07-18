@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 //@RequestMapping("/v1")
@@ -49,8 +50,8 @@ public class DataInstanceMasterController {
     }
 
     @GetMapping(path = "/api/dataInstanceMaster/query2")
-    public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMaster(@RequestParam Long dateTimeEpoch,@RequestParam Long zeroDateTimeEpoch){
-        return dataInstanceService.findDataInstanceByIntervalWithClassMaster(dateTimeEpoch,zeroDateTimeEpoch);
+    public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMaster(@RequestParam Long dateTimeEpoch,@RequestParam Long zeroDateTimeEpoch,@RequestParam int projectStoreID){
+        return dataInstanceService.findDataInstanceByIntervalWithClassMaster(dateTimeEpoch,zeroDateTimeEpoch,projectStoreID);
     }
 
     @GetMapping(path = "/api/dataInstanceMaster/status/query1")
@@ -59,7 +60,13 @@ public class DataInstanceMasterController {
     }
 
     @GetMapping(path = "/api/dataInstanceMaster/status/query2")
-    public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMasterV1(@RequestParam Long dateTimeEpoch,@RequestParam Long zeroDateTimeEpoch,@RequestParam int instanceStatus){
-        return dataInstanceService.findDataInstanceByIntervalWithClassMasterV1(dateTimeEpoch,zeroDateTimeEpoch,instanceStatus);
+    public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMasterV1(@RequestParam Long dateTimeEpoch,@RequestParam Long zeroDateTimeEpoch,@RequestParam int instanceStatus,@RequestParam int projectStoreID){
+        return dataInstanceService.findDataInstanceByIntervalWithClassMasterV1(dateTimeEpoch,zeroDateTimeEpoch,instanceStatus,projectStoreID);
+    }
+
+
+    @GetMapping(path = "/api/dataInstanceMaster/lastComment")
+    public Optional<DataInstanceMaster> findLastCommentByItemMasterID(@RequestParam int itemMasterID){
+        return dataInstanceService.findLastCommentByItemMasterID(itemMasterID);
     }
 }

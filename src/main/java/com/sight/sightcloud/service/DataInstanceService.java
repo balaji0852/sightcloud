@@ -48,15 +48,20 @@ public class DataInstanceService {
         return dataInstanceMasterRepository.findDataInstanceByOneInterval(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID);
     }
 
-    public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMaster(Long dateTimeEpoch, Long zeroDateTimeEpoch){
-        return dataInstanceMasterRepository.findDataInstanceByIntervalWithClassMaster(dateTimeEpoch,zeroDateTimeEpoch);
+    public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMaster(Long dateTimeEpoch, Long zeroDateTimeEpoch,int projectStoreID){
+        return dataInstanceMasterRepository.findDataInstanceByIntervalWithClassMaster(dateTimeEpoch,zeroDateTimeEpoch,projectStoreID);
     }
 
     public List<DataInstanceMaster> findDataInstanceByOneIntervalV1(Long dateTimeEpoch, Long zeroDateTimeEpoch, int itemMasterID,int instancesStatus){
         return dataInstanceMasterRepository.findDataInstanceByOneIntervalV1(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID,instancesStatus);
     }
 
-    public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMasterV1(Long dateTimeEpoch,Long zeroDateTimeEpoch,int instancesStatus){
-        return dataInstanceMasterRepository.findDataInstanceByIntervalWithClassMasterV1(dateTimeEpoch,zeroDateTimeEpoch,instancesStatus);
+    public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMasterV1(Long dateTimeEpoch,Long zeroDateTimeEpoch,int instancesStatus,int projectStoreID){
+        return dataInstanceMasterRepository.findDataInstanceByIntervalWithClassMasterV1(dateTimeEpoch,zeroDateTimeEpoch,instancesStatus,projectStoreID);
+    }
+
+
+    public Optional<DataInstanceMaster> findLastCommentByItemMasterID(int itemMasterID){
+        return dataInstanceMasterRepository.findDataInstanceByLastComment(itemMasterID);
     }
 }

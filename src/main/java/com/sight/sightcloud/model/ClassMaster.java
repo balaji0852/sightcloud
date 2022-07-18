@@ -25,8 +25,12 @@ public class ClassMaster {
 
     private String description;
 
-    @OneToMany(mappedBy = "classMaster",cascade = CascadeType.ALL   )
+    @OneToMany(mappedBy = "classMaster",cascade = CascadeType.ALL)
     private Set<DataInstanceMaster> dataInstanceMasterSet;
+
+    @ManyToOne
+    @JoinColumn(name = "ProjectStoreID")
+    private ProjectStore projectStore;
 
     public int getItemMasterID() {
         return itemMasterID;

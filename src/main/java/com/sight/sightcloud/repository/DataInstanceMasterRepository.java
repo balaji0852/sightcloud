@@ -20,17 +20,20 @@ public interface DataInstanceMasterRepository extends JpaRepository<DataInstance
 //      @Query("SELECT u FROM User u WHERE u.status = ?1 and u.name = ?2")
 //      User findUserByStatusAndName(Integer status, String name);
 //
-    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.instanceTime>=?1 and d.instanceTime<=?2 and d.classMaster.itemMasterID=?3 ")
+    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.instanceTime>=?1 and d.instanceTime<=?2 and d.classMaster.itemMasterID =?3")
     List<DataInstanceMaster> findDataInstanceByOneInterval(Long dateTimeEpoch,Long zeroDateTimeEpoch, int itemMasterID);
 
-    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.instanceTime>=?1 and d.instanceTime<=?2")
-    List<DataInstanceMaster> findDataInstanceByIntervalWithClassMaster(Long dateTimeEpoch,Long zeroDateTimeEpoch);
+    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.instanceTime>=?1 and d.instanceTime<=?2 and d.classMaster.projectStore.ProjectStoreID=?3")
+    List<DataInstanceMaster> findDataInstanceByIntervalWithClassMaster(Long dateTimeEpoch,Long zeroDateTimeEpoch,int projectStoreID );
 
     @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.instanceTime>=?1 and d.instanceTime<=?2 and d.classMaster.itemMasterID=?3  and d.instancesStatus=?4")
     List<DataInstanceMaster> findDataInstanceByOneIntervalV1(Long dateTimeEpoch,Long zeroDateTimeEpoch, int itemMasterID,int instancesStatus);
 
-    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.instanceTime>=?1 and d.instanceTime<=?2 and d.instancesStatus=?3")
-    List<DataInstanceMaster> findDataInstanceByIntervalWithClassMasterV1(Long dateTimeEpoch,Long zeroDateTimeEpoch,int instanceStatus);
+    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.instanceTime>=?1 and d.instanceTime<=?2 and d.instancesStatus=?3 and d.classMaster.projectStore.ProjectStoreID=?4")
+    List<DataInstanceMaster> findDataInstanceByIntervalWithClassMasterV1(Long dateTimeEpoch,Long zeroDateTimeEpoch,int instanceStatus,int projectStoreID);
 
+
+    @Query(nativeQuery = true, value = "SELECT * FROM DataInstancesMaster d WHERE  d.classMaster.itemMasterID= ?1 ORDER BY d.instancesTime ")
+    Optional<DataInstanceMaster> findDataInstanceByLastComment(int itemMasterID);
 
 }
