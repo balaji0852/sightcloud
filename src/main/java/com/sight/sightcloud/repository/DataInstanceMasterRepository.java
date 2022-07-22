@@ -33,7 +33,7 @@ public interface DataInstanceMasterRepository extends JpaRepository<DataInstance
     List<DataInstanceMaster> findDataInstanceByIntervalWithClassMasterV1(Long dateTimeEpoch,Long zeroDateTimeEpoch,int instanceStatus,int projectStoreID);
 
 
-    @Query(nativeQuery = true, value = "SELECT * FROM DataInstancesMaster d WHERE  d.classMaster.itemMasterID= ?1 ORDER BY d.instancesTime ")
+    @Query(nativeQuery = true, value = "SELECT * FROM DataInstancesMaster d WHERE  d.classMaster.itemMasterID= ?1 ORDER BY d.instancesTime DESC LIMIT 1")
     Optional<DataInstanceMaster> findDataInstanceByLastComment(int itemMasterID);
 
 }

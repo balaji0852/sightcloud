@@ -18,29 +18,29 @@ public class projectStoreService {
 
    // private final userManagementRepository userManagementRepository;
 
+    @Autowired
     public projectStoreService(projectStoreRepository projectStoreRepository) {
         this.projectStoreRepository = projectStoreRepository;
         //this.userManagementRepository = userManagementRepository;
     }
 
 
-    public Optional<ProjectStore> findAllProjectByUserStoreID(int userStoreID){
-        return projectStoreRepository.findByUserManagementStoreUserStoreID(userStoreID);
-    }
+//    public Optional<ProjectStore> findAllProjectByUserStoreID(int userStoreID){
+//        return projectStoreRepository.findAllByUserManagementStoreUserStoreID(userStoreID);
+//    }
 
-    public boolean insertProject(ProjectStore projectStore){
+    public int insertProject(ProjectStore projectStore){
         try{
-            projectStoreRepository.save(projectStore);
-            return true;
+           return projectStoreRepository.save(projectStore).getProjectStoreID();
         }catch (Exception e){
-            return false;
+            return -1;
         }
     }
 
     public boolean deleteProject(int projectStoreID){
         try{
             if(projectStoreRepository.existsById(projectStoreID)) {
-                ProjectStore projectStore = projectStoreRepository.getById(projectStoreID);
+                ProjectStore projectStore = projectStoreRepository.findByprojectStoreID(projectStoreID);
                 projectStoreRepository.delete(projectStore);
                 return true;
             }
@@ -61,8 +61,8 @@ public class projectStoreService {
 
 
 
-//    Optional<ProjectStore> findAllProjectsByUserStoreID(int userStoreID){
+    public List<ProjectStore> findAllProjectByUserStoreID(int userStoreID){
 //        UserManagementStore userManagementStore =
-//        return projectStoreRepository.findByUserManagementStore_UserStore(userStoreID);
-//    }
+        return projectStoreRepository.findAllByUserManagementStore_UserStoreID(userStoreID);
+    }
 }

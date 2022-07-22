@@ -2,6 +2,7 @@ package com.sight.sightcloud.model;
 
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Set;
 
 @Table(name = "UserStore")
@@ -24,8 +25,8 @@ public class UserStore {
 
     private String userName;
 
-    @OneToMany(mappedBy="userStore" , cascade = CascadeType.ALL)
-    private Set<UserManagementStore> UserManagementStoreSet;
+//    @OneToMany(mappedBy="userStore" , cascade = CascadeType.ALL)
+//    private Collection<UserManagementStore> UserManagementStoreSet;
 
     public int getUserStoreID() {
         return userStoreID;
@@ -83,11 +84,11 @@ public class UserStore {
         this.userName = userName;
     }
 
-    public Set<UserManagementStore> getUserManagementStoreSet() {
-        return UserManagementStoreSet;
-    }
-
-    public void setUserManagementStoreSet(Set<UserManagementStore> userManagementStoreSet) {
-        UserManagementStoreSet = userManagementStoreSet;
-    }
+//    public Collection<UserManagementStore> getUserManagementStoreSet() {
+//        return UserManagementStoreSet;
+//    }
+//
+//    public void setUserManagementStoreSet(Collection<UserManagementStore> userManagementStoreSet) {
+//        UserManagementStoreSet = userManagementStoreSet;
+//    }
 }

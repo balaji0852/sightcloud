@@ -13,6 +13,22 @@ public class ClassMaster {
 
     private String itemName;
 
+    public Set<DataInstanceMaster> getDataInstanceMasterSet() {
+        return dataInstanceMasterSet;
+    }
+
+    public void setDataInstanceMasterSet(Set<DataInstanceMaster> dataInstanceMasterSet) {
+        this.dataInstanceMasterSet = dataInstanceMasterSet;
+    }
+
+    public ProjectStore getProjectStore() {
+        return projectStore;
+    }
+
+    public void setProjectStore(ProjectStore projectStore) {
+        this.projectStore = projectStore;
+    }
+
     private int categoryID;
 
     private int subCategoryID;
@@ -29,7 +45,7 @@ public class ClassMaster {
     private Set<DataInstanceMaster> dataInstanceMasterSet;
 
     @ManyToOne
-    @JoinColumn(name = "ProjectStoreID")
+    @JoinColumn(name = "project_storeid")
     private ProjectStore projectStore;
 
     public int getItemMasterID() {

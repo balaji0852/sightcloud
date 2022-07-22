@@ -19,8 +19,8 @@ public class classMasterService {
         this.classMasterRepository = classMasterRepository;
     }
 
-    public Optional<ClassMaster> findClassMasterByProjectStoreID(int projectStoreID){
-        return classMasterRepository.findByProjectStoreID(projectStoreID);
+    public List<ClassMaster> findClassMasterByProjectStoreID(int projectStoreID){
+        return classMasterRepository.findAllProjectStoreID(projectStoreID);
     }
 
     public List<ClassMaster> getClassMaster(){

@@ -9,6 +9,7 @@ import java.util.Set;
 @Table(name = "projectStore")
 public class ProjectStore {
 
+    //need to get the userStoreID in the body
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,12 +24,12 @@ public class ProjectStore {
     private String projectDescription;
 
 
-    @OneToMany(mappedBy = "projectStore",cascade = CascadeType.ALL)
-    private Set<ClassMaster> classMasterSet;
+//    @OneToMany(mappedBy = "projectStore",cascade = CascadeType.ALL)
+//    private Collection<ClassMaster> classMasterSet;
+//
 
-
-    @OneToMany(mappedBy="projectStore" , cascade = CascadeType.ALL)
-    private Collection<UserManagementStore> UserManagementStoreSet;
+//    @OneToMany(mappedBy="projectStore" , cascade = CascadeType.ALL)
+//    private Collection<UserManagementStore> UserManagementStoreSet;
 
     public int getProjectStoreID() {
         return ProjectStoreID;
@@ -70,19 +71,19 @@ public class ProjectStore {
         this.projectDescription = projectDescription;
     }
 
-    public Set<ClassMaster> getClassMasterSet() {
-        return classMasterSet;
-    }
-
-    public void setClassMasterSet(Set<ClassMaster> classMasterSet) {
-        this.classMasterSet = classMasterSet;
-    }
-
-    public Collection<UserManagementStore> getUserManagementStoreSet() {
-        return UserManagementStoreSet;
-    }
-
-    public void setUserManagementStoreSet(Collection<UserManagementStore> userManagementStoreSet) {
-        UserManagementStoreSet = userManagementStoreSet;
-    }
+//    public Collection<ClassMaster> getClassMasterSet() {
+//        return classMasterSet;
+//    }
+//
+//    public void setClassMasterSet(Collection<ClassMaster> classMasterSet) {
+//        this.classMasterSet = classMasterSet;
+//    }
+////
+//    public Collection<UserManagementStore> getUserManagementStoreSet() {
+//        return UserManagementStoreSet;
+//    }
+//
+//    public void setUserManagementStoreSet(Collection<UserManagementStore> userManagementStoreSet) {
+//        UserManagementStoreSet = userManagementStoreSet;
+//    }
 }

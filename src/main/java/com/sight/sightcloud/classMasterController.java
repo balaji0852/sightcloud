@@ -21,8 +21,8 @@ public class classMasterController {
     }
 
 
-    @GetMapping("/api/classMaster")
-    public Optional<ClassMaster> getAllByProjectStoreID(@RequestBody int projectStoreID) {
+    @GetMapping("/api/classMaster/projectStore/{projectStoreID}")
+    public List<ClassMaster> getAllByProjectStoreID(@PathVariable int projectStoreID) {
         return classMasterService.findClassMasterByProjectStoreID(projectStoreID);
     }
 

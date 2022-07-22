@@ -14,7 +14,21 @@ public class UserManagementStore {
 
     private boolean isAdmin;
 
+    public int getUserManagementStoreID() {
+        return UserManagementStoreID;
+    }
 
+    public void setUserManagementStoreID(int userManagementStoreID) {
+        UserManagementStoreID = userManagementStoreID;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 
     @ManyToOne
     @JoinColumn(name = "userStoreID")

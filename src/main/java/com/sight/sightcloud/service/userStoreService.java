@@ -6,6 +6,7 @@ import com.sight.sightcloud.repository.userStoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,7 +23,7 @@ public class userStoreService {
         return UserStoreRepository.findBylinkedEmail(linkedEmail);
     }
 
-    public UserStore findUserByPhone(String linkedPhone){
+    public List<UserStore> findUserByPhone(String linkedPhone){
         return UserStoreRepository.findBylinkedPhone(linkedPhone);
     }
 
@@ -30,9 +31,16 @@ public class userStoreService {
         return UserStoreRepository.findByuserStoreID(UserStoreID);
     }
 
+    //balaji : Empty userStore will throw NPE
     public boolean findForDuplicateEmail(String linkingEmail){
-        UserStore userStore = findUserByEmail(linkingEmail);
-        return userStore.getLinkedEmail().isEmpty();
+
+            UserStore userStore = findUserByEmail(linkingEmail);
+            return null==userStore;
+                //return true;
+           // }
+        //}catch (NullPointerException e){
+            //return true;
+        //}
     }
 
     public boolean insertUser(UserStore userStore){

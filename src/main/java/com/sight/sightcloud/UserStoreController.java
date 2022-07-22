@@ -17,27 +17,27 @@ public class UserStoreController {
     //balaji : may be need to check for presence of duplicate entity
     @PostMapping(path = "/api/userStore")
     public ResponseEntity<String> addUser(@RequestBody UserStore userStore){
-        if(userStoreService.findForDuplicateEmail(userStore.getLinkedEmail())) {
+       if(userStoreService.findForDuplicateEmail(userStore.getLinkedEmail())) {
             if (userStoreService.insertUser(userStore)) {
                 return ResponseEntity.ok().body("success");
             }
-        }else{
+       }else{
             return ResponseEntity.status(400).body("Bad Request");
         }
         return ResponseEntity.status(500).body("internal service error");
     }
 
-    @GetMapping(path = "/api/userStore/{linkedEmail}")
+    @GetMapping(path = "/api/userStore/linkedEmail/{linkedEmail}")
     public ResponseEntity<UserStore> findUserByEmail(@PathVariable String linkedEmail){
         return ResponseEntity.status(200).body(userStoreService.findUserByEmail(linkedEmail));
     }
-    @GetMapping(path = "/api/userStore/{linkedPhone}")
-    public ResponseEntity<UserStore> findUserByPhone(@PathVariable String linkedPhone){
+    @GetMapping(path = "/api/userStore/linkedPhone/{linkedPhone}")
+    public ResponseEntity<List<UserStore>> findUserByPhone(@PathVariable String linkedPhone){
         return ResponseEntity.status(200).body(userStoreService.findUserByPhone(linkedPhone));
     }
 
     //will be used for userAbout
-    @GetMapping(path = "/api/userStore/{userStoreID}")
+    @GetMapping(path = "/api/userStore/userStoreID/{userStoreID}")
     public ResponseEntity<UserStore> findUserByUserStoreID(@PathVariable int userStoreID){
         return ResponseEntity.status(200).body(userStoreService.findUserByUserStoreID(userStoreID));
     }
