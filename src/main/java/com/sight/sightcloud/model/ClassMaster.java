@@ -13,22 +13,6 @@ public class ClassMaster {
 
     private String itemName;
 
-    public Set<DataInstanceMaster> getDataInstanceMasterSet() {
-        return dataInstanceMasterSet;
-    }
-
-    public void setDataInstanceMasterSet(Set<DataInstanceMaster> dataInstanceMasterSet) {
-        this.dataInstanceMasterSet = dataInstanceMasterSet;
-    }
-
-    public ProjectStore getProjectStore() {
-        return projectStore;
-    }
-
-    public void setProjectStore(ProjectStore projectStore) {
-        this.projectStore = projectStore;
-    }
-
     private int categoryID;
 
     private int subCategoryID;
@@ -41,8 +25,8 @@ public class ClassMaster {
 
     private String description;
 
-    @OneToMany(mappedBy = "classMaster",cascade = CascadeType.ALL)
-    private Set<DataInstanceMaster> dataInstanceMasterSet;
+//    @OneToMany(mappedBy = "classMaster",cascade = CascadeType.ALL)
+//    private Set<DataInstanceMaster> dataInstanceMasterSet;
 
     @ManyToOne
     @JoinColumn(name = "project_storeid")
@@ -111,4 +95,13 @@ public class ClassMaster {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public ProjectStore getProjectStore() {
+        return projectStore;
+    }
+
+    public void setProjectStore(ProjectStore projectStore) {
+        this.projectStore = projectStore;
+    }
+
 }
