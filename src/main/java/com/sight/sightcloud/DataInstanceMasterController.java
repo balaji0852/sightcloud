@@ -34,7 +34,7 @@ public class DataInstanceMasterController {
         return ResponseEntity.status(500).body("internal service error");
     }
 
-    @PutMapping(path = "/api/dataInstanceMaster")
+    @PutMapping(path = "/api/dataInstanceMaster/update")
     public ResponseEntity<String> updateDataInstanceMaster(@RequestBody DataInstanceMaster dataInstanceMaster){
         boolean responseFlag = dataInstanceService.updateDataInstanceMaster(dataInstanceMaster);
 
