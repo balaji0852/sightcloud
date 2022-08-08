@@ -35,6 +35,19 @@ public class DataInstanceService {
         return false;
     }
 
+
+
+    public boolean updateDataInstanceMaster(DataInstanceMaster dataInstanceMaster){
+        try{
+            dataInstanceMasterRepository.save(dataInstanceMaster);
+            return true;
+        }catch (Exception e){
+
+        }
+
+        return false;
+    }
+
     public Boolean deleteDataInstanceMaster(int dataInstanceID){
         DataInstanceMaster dataInstanceMaster = dataInstanceMasterRepository.getById(dataInstanceID);
         if(dataInstanceMasterRepository.existsById(dataInstanceID)){

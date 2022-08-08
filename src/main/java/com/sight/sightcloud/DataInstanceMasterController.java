@@ -34,6 +34,17 @@ public class DataInstanceMasterController {
         return ResponseEntity.status(500).body("internal service error");
     }
 
+    @PutMapping(path = "/api/dataInstanceMaster")
+    public ResponseEntity<String> updateDataInstanceMaster(@RequestBody DataInstanceMaster dataInstanceMaster){
+        boolean responseFlag = dataInstanceService.updateDataInstanceMaster(dataInstanceMaster);
+
+        if(responseFlag){
+            return ResponseEntity.status(200).body("success");
+        }
+
+        return ResponseEntity.status(500).body("internal service error");
+    }
+
     @DeleteMapping(path = "/api/dataInstanceMaster/{dataInstanceID}")
     public ResponseEntity<String> deleteDataInstanceMaster(@PathVariable int dataInstanceID){
         boolean responseFlag = dataInstanceService.deleteDataInstanceMaster(dataInstanceID);
