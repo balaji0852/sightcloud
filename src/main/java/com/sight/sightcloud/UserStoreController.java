@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@CrossOrigin(origins = {"http://localhost:3000","http://edmsadmin.azurewebsites.net"},maxAge = 5000 )
 @RestController
 public class UserStoreController {
 
