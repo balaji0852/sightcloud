@@ -23,13 +23,23 @@ public class classMasterService {
         return classMasterRepository.findAllProjectStoreID(projectStoreID);
     }
 
+    public ClassMaster findByItemMasterID(int ItemMasterID){
+        return classMasterRepository.findByItemMasterID(ItemMasterID);
+        //return classMasterRepository.findById(ItemMasterID).get();
+    }
+
     public List<ClassMaster> getClassMaster(){
         return classMasterRepository.findAll();
     }
 
     public Boolean postClassMaster(ClassMaster classMaster){
-        classMasterRepository.save(classMaster);
-        return true;
+
+        try {
+            classMasterRepository.save(classMaster);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
     }
 
     public Boolean deleteClassMaster(int itemMasterID){

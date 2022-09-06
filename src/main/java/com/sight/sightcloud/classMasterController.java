@@ -27,6 +27,12 @@ public class classMasterController {
         return classMasterService.findClassMasterByProjectStoreID(projectStoreID);
     }
 
+    //balaji - 6/9/22 - new requirement
+    @GetMapping("/api/classMaster/id")
+    public ClassMaster getClassMasterByItemMasterId(@RequestParam int itemMasterID) {
+        return classMasterService.findByItemMasterID(itemMasterID);
+    }
+
     @PostMapping("/api/classMaster")
     public ResponseEntity<String> postClassMaster(@RequestBody ClassMaster classMaster){
         Boolean responseFlag = classMasterService.postClassMaster(classMaster);
