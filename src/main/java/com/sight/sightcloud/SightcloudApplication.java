@@ -23,7 +23,7 @@ public class SightcloudApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("http://localhost:3000", "http://edmsadmin.azurewebsites.net");
+				registry.addMapping("/**").allowedOrigins("http://localhost:3000", "https://edmsadmin.azurewebsites.net");
 			}
 		};
 	}
