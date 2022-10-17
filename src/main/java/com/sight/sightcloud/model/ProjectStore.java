@@ -8,8 +8,8 @@ import java.util.Collection;
 import java.util.Set;
 
 
-@Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//@Cacheable
+//@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 @Table(name = "projectStore")
 public class ProjectStore {
