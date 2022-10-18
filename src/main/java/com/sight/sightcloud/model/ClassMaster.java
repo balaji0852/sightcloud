@@ -1,13 +1,8 @@
 package com.sight.sightcloud.model;
 
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import javax.persistence.*;
 import java.util.Set;
 
-
-@Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 @Table(name = "classmaster")
 public class ClassMaster {
