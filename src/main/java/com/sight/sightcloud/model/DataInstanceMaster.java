@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.UUID;
 
 
-//@Cacheable
-//@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 @Table(name = "DataInstanceMaster")
 public class DataInstanceMaster {
