@@ -17,13 +17,21 @@ public class ProjectStore {
 
     private boolean deactivateProject;
 
-    private int servicePlanID;
+    @ManyToOne
+    @JoinColumn(name = "ServiceID")
+    private ServicePlanStore servicePlanStore;
 
     private String projectName;
 
     private String projectDescription;
 
+    public ServicePlanStore getServicePlanStore() {
+        return servicePlanStore;
+    }
 
+    public void setServicePlanStore(ServicePlanStore servicePlanStore) {
+        this.servicePlanStore = servicePlanStore;
+    }
 //    @OneToMany(mappedBy = "projectStore",cascade = CascadeType.ALL)
 //    private Collection<ClassMaster> classMasterSet;
 //
@@ -47,13 +55,7 @@ public class ProjectStore {
         this.deactivateProject = deactivateProject;
     }
 
-    public int getServicePlanID() {
-        return servicePlanID;
-    }
 
-    public void setServicePlanID(int servicePlanID) {
-        this.servicePlanID = servicePlanID;
-    }
 
     public String getProjectName() {
         return projectName;
