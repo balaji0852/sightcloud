@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'sightcloud'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D839D9756DEB40CA9ACDA4A452797B28 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9D20207336B54835BBBE90200187718F }}
           package: '*.jar'
