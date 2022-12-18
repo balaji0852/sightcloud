@@ -47,7 +47,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'sighcloud2'
+          app-name: 'sightcloud'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.SECRET }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_923F2F2BA2B2447FBF959C1765122CB5 }}
           package: '*.jar'
