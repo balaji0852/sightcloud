@@ -25,6 +25,19 @@ public class ClassMaster {
 
     private String description;
 
+    //balaji : 21/12: adding carryForwardMyWork bool
+    private boolean carryForwardMyWork;
+
+
+    public boolean isCarryForwardMyWork() {
+        return carryForwardMyWork;
+    }
+
+    public void setCarryForwardMyWork(boolean carryForwardMyWork) {
+        this.carryForwardMyWork = carryForwardMyWork;
+    }
+
+
 //    @OneToMany(mappedBy = "classMaster",cascade = CascadeType.ALL)
 //    private Set<DataInstanceMaster> dataInstanceMasterSet;
 

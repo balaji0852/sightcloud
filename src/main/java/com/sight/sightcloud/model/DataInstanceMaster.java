@@ -1,6 +1,7 @@
 package com.sight.sightcloud.model;
 
 
+import org.apache.catalina.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -29,6 +30,19 @@ public class DataInstanceMaster {
 
     private int instancesStatus;
 
+
+    @ManyToOne
+    @JoinColumn(name = "user_storeid")
+    private UserStore userStore;
+
+
+    public UserStore getUserStore() {
+        return userStore;
+    }
+
+    public void setUserStore(UserStore userStore) {
+        this.userStore = userStore;
+    }
 
     public int getDataInstanceID() {
         return dataInstanceID;

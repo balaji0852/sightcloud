@@ -25,6 +25,16 @@ public class UserStore {
 
     private String userName;
 
+
+    private String photoURL;
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
 //    @OneToMany(mappedBy="userStore" , cascade = CascadeType.ALL)
 //    private Collection<UserManagementStore> UserManagementStoreSet;
 
