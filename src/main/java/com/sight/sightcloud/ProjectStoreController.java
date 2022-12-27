@@ -3,6 +3,8 @@ package com.sight.sightcloud;
 import com.sight.sightcloud.model.ProjectStore;
 import com.sight.sightcloud.model.UserManagementStore;
 import com.sight.sightcloud.model.UserStore;
+import com.sight.sightcloud.model.projectSetting;
+import com.sight.sightcloud.service.projectSettingService;
 import com.sight.sightcloud.service.projectStoreService;
 import com.sight.sightcloud.service.userManagementStoreService;
 import com.sight.sightcloud.service.userStoreService;
@@ -19,6 +21,9 @@ public class ProjectStoreController {
 
     @Autowired
     private projectStoreService projectStoreService;
+
+    @Autowired
+    private com.sight.sightcloud.service.projectSettingService projectSettingService;
 
     @Autowired
     private userManagementStoreService userManagementStoreService;
@@ -42,7 +47,15 @@ public class ProjectStoreController {
             userManagementStore.setUserStore(userStore);
             projectStore.setProjectStoreID(projectStoreID);
             userManagementStore.setProjectStore(projectStore);
-            if(userManagementStoreService.createProjectUser(userManagementStore)) {
+
+            //27/12/2022, adding project setting
+            projectSetting projectSetting = new projectSetting();
+            projectSetting.setProjectStore(projectStore);
+            projectSetting.setCarryForwardMyWork(false);
+
+
+
+            if(userManagementStoreService.createProjectUser(userManagementStore) && projectSettingService.addSetting(projectSetting)) {
                 return ResponseEntity.status(200).body("success");
             }
             return ResponseEntity.status(201).body("success-contact admin");

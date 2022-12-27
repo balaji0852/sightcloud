@@ -33,23 +33,41 @@ public interface DataInstanceMasterRepository extends JpaRepository<DataInstance
     List<DataInstanceMaster> findDataInstanceByIntervalWithClassMasterV1(Long dateTimeEpoch,Long zeroDateTimeEpoch,int instanceStatus,int projectStoreID);
 
 
+
+
+
     @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.classMaster.carryForwardMyWork=true and d.instancesStatus!=3 and d.classMaster.itemMasterID =?1")
     List<DataInstanceMaster> findDataInstanceByItemMasterID( int itemMasterID);
 
     @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.instanceTime>=?1 and d.instanceTime<=?2 and d.classMaster.carryForwardMyWork=true and d.instancesStatus=3 and d.classMaster.itemMasterID =?3")
     List<DataInstanceMaster> findDataInstanceByItemMasterID2(Long dateTimeEpoch,Long zeroDateTimeEpoch, int itemMasterID);
 
-    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.classMaster.carryForwardMyWork=true and d.instancesStatus!=3 and d.classMaster.projectStore.ProjectStoreID =?1")
-    List<DataInstanceMaster> findDataInstanceByProjectStoreID( int projectStoreID);
 
-    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.classMaster.carryForwardMyWork=true and d.instancesStatus= ?2 and d.instancesStatus !=3 and d.classMaster.itemMasterID =?1")
+
+    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.classMaster.carryForwardMyWork=true and d.instancesStatus!=3 and d.instancesStatus= ?2  and d.classMaster.itemMasterID =?1")
     List<DataInstanceMaster> findDataInstanceByItemMasterIDAndStatus( int itemMasterID,int instancesStatus);
 
     @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.instanceTime>=?1 and d.instanceTime<=?2 and d.classMaster.carryForwardMyWork=true and  d.instancesStatus = 3 and d.classMaster.itemMasterID =?3")
     List<DataInstanceMaster> findDataInstanceByItemMasterIDAndStatus2(Long dateTimeEpoch,Long zeroDateTimeEpoch, int itemMasterID,int instancesStatus);
 
-    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.classMaster.carryForwardMyWork=true and d.instancesStatus =?2 and d.classMaster.projectStore.ProjectStoreID =?1")
+
+
+
+    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.instancesStatus!=3 and d.classMaster.projectStore.ProjectStoreID =?1")
+    List<DataInstanceMaster> findDataInstanceByProjectStoreID( int projectStoreID);
+
+    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE  d.instancesStatus=3 and d.classMaster.projectStore.ProjectStoreID =?1 and d.instanceTime>=?2 and d.instanceTime<=?3")
+    List<DataInstanceMaster> findDataInstanceByProjectStoreID2( int projectStoreID,Long dateTimeEpoch,Long zeroDateTimeEpoch);
+
+
+    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE and d.instancesStatus!=3 and d.instancesStatus =?2 and d.classMaster.projectStore.ProjectStoreID =?1")
     List<DataInstanceMaster> findDataInstanceByProjectStoreIDAndStatus( int projectStoreID,int instancesStatus);
+
+    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE  d.instancesStatus=3 and d.classMaster.projectStore.ProjectStoreID =?1 and d.instanceTime>=?2 and d.instanceTime<=?3")
+    List<DataInstanceMaster> findDataInstanceByProjectStoreIDAndStatus2( int projectStoreID,Long dateTimeEpoch,Long zeroDateTimeEpoch,int instancesStatus);
+
+
+
 
 
     @Query(nativeQuery = true, value = "SELECT * FROM data_instance_master d WHERE  d.item_masterid= ?1 ORDER BY d.instance_time DESC LIMIT 1")

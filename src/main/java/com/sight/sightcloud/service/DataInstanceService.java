@@ -2,6 +2,7 @@ package com.sight.sightcloud.service;
 
 import com.sight.sightcloud.model.ClassMaster;
 import com.sight.sightcloud.model.DataInstanceMaster;
+import com.sight.sightcloud.model.projectSetting;
 import com.sight.sightcloud.repository.DataInstanceMasterRepository;
 import com.sight.sightcloud.repository.classMasterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,13 @@ public class DataInstanceService {
 
     private final classMasterRepository classMasterRepository;
 
+    private final projectSettingService projectSettingService;
+
     @Autowired
-    DataInstanceService(DataInstanceMasterRepository dataInstanceMasterRepository,classMasterRepository _classMasterRepository){
+    public DataInstanceService(DataInstanceMasterRepository dataInstanceMasterRepository, com.sight.sightcloud.repository.classMasterRepository classMasterRepository, com.sight.sightcloud.service.projectSettingService projectSettingService) {
         this.dataInstanceMasterRepository = dataInstanceMasterRepository;
-        this.classMasterRepository  = _classMasterRepository;
+        this.classMasterRepository = classMasterRepository;
+        this.projectSettingService = projectSettingService;
     }
 
     public List<DataInstanceMaster> getAllDataInstanceMaster(){
@@ -80,8 +84,12 @@ public class DataInstanceService {
     }
 
     public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMaster(Long dateTimeEpoch, Long zeroDateTimeEpoch,int projectStoreID){
-//        if(isPresentDay(dateTimeEpoch))
-//            return dataInstanceMasterRepository.findDataInstanceByProjectStoreID(projectStoreID);
+        projectSetting projectSetting = projectSettingService.getSettingByProjectStoreID(projectStoreID);
+        if(isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
+            return dataInstanceMasterRepository.findDataInstanceByProjectStoreID(projectStoreID);
+        }else if(!isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
+            return dataInstanceMasterRepository.findDataInstanceByProjectStoreID2(projectStoreID,dateTimeEpoch,zeroDateTimeEpoch);
+        }
 
         return dataInstanceMasterRepository.findDataInstanceByIntervalWithClassMaster(dateTimeEpoch,zeroDateTimeEpoch,projectStoreID);
     }
@@ -101,9 +109,12 @@ public class DataInstanceService {
     }
 
     public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMasterV1(Long dateTimeEpoch,Long zeroDateTimeEpoch,int instancesStatus,int projectStoreID){
-//        if(isPresentDay(dateTimeEpoch))
-//            return dataInstanceMasterRepository.findDataInstanceByProjectStoreIDAndStatus(projectStoreID,instancesStatus);
-
+        projectSetting projectSetting = projectSettingService.getSettingByProjectStoreID(projectStoreID);
+        if(isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
+            return dataInstanceMasterRepository.findDataInstanceByProjectStoreIDAndStatus(projectStoreID,instancesStatus);
+        }else if(!isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
+            return dataInstanceMasterRepository.findDataInstanceByProjectStoreIDAndStatus2(projectStoreID,dateTimeEpoch,zeroDateTimeEpoch,instancesStatus);
+        }
 
         return dataInstanceMasterRepository.findDataInstanceByIntervalWithClassMasterV1(dateTimeEpoch,zeroDateTimeEpoch,instancesStatus,projectStoreID);
     }
