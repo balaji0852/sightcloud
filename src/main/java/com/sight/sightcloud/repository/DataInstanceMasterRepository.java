@@ -35,7 +35,6 @@ public interface DataInstanceMasterRepository extends JpaRepository<DataInstance
 
 
 
-
     @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.classMaster.carryForwardMyWork=true and d.instancesStatus!=3 and d.classMaster.itemMasterID =?1")
     List<DataInstanceMaster> findDataInstanceByItemMasterID( int itemMasterID);
 
@@ -60,7 +59,7 @@ public interface DataInstanceMasterRepository extends JpaRepository<DataInstance
     List<DataInstanceMaster> findDataInstanceByProjectStoreID2( int projectStoreID,Long dateTimeEpoch,Long zeroDateTimeEpoch);
 
 
-    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE and d.instancesStatus!=3 and d.instancesStatus =?2 and d.classMaster.projectStore.ProjectStoreID =?1")
+    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE  d.instancesStatus!=3 and d.instancesStatus =?2 and d.classMaster.projectStore.ProjectStoreID =?1")
     List<DataInstanceMaster> findDataInstanceByProjectStoreIDAndStatus( int projectStoreID,int instancesStatus);
 
     @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE  d.instancesStatus=3 and d.classMaster.projectStore.ProjectStoreID =?1 and d.instanceTime>=?2 and d.instanceTime<=?3")

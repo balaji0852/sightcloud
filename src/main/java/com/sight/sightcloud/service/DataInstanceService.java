@@ -73,9 +73,12 @@ public class DataInstanceService {
     public List<DataInstanceMaster> findDataInstanceByOneInterval(Long dateTimeEpoch, Long zeroDateTimeEpoch, int itemMasterID){
         ClassMaster classMaster = classMasterRepository.findByItemMasterID(itemMasterID);
 
-        if(isPresentDay(dateTimeEpoch) && classMaster.isCarryForwardMyWork()) {
+        //12/27/2022: balaji adding this to route project wide cfmw
+        projectSetting projectSetting = projectSettingService.getSettingByProjectStoreID(classMaster.getProjectStore().getProjectStoreID());
+
+        if(isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork() || projectSetting.isCarryForwardMyWork())) {
             return dataInstanceMasterRepository.findDataInstanceByItemMasterID(itemMasterID);
-        }else if(!isPresentDay(dateTimeEpoch) && classMaster.isCarryForwardMyWork()) {
+        }else if(!isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork() || projectSetting.isCarryForwardMyWork())) {
             return dataInstanceMasterRepository.findDataInstanceByItemMasterID2(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID);
         }
 
@@ -85,6 +88,7 @@ public class DataInstanceService {
 
     public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMaster(Long dateTimeEpoch, Long zeroDateTimeEpoch,int projectStoreID){
         projectSetting projectSetting = projectSettingService.getSettingByProjectStoreID(projectStoreID);
+
         if(isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
             return dataInstanceMasterRepository.findDataInstanceByProjectStoreID(projectStoreID);
         }else if(!isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
@@ -97,10 +101,13 @@ public class DataInstanceService {
     public List<DataInstanceMaster> findDataInstanceByOneIntervalV1(Long dateTimeEpoch, Long zeroDateTimeEpoch, int itemMasterID,int instancesStatus){
         ClassMaster classMaster = classMasterRepository.findByItemMasterID(itemMasterID);
 
-        if(isPresentDay(dateTimeEpoch) && classMaster.isCarryForwardMyWork()) {
+        //12/27/2022: balaji adding this to route project wide cfmw
+        projectSetting projectSetting = projectSettingService.getSettingByProjectStoreID(classMaster.getProjectStore().getProjectStoreID());
+
+        if(isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork() || projectSetting.isCarryForwardMyWork())) {
             return dataInstanceMasterRepository.findDataInstanceByItemMasterIDAndStatus(itemMasterID,instancesStatus);
 
-        }else if(!isPresentDay(dateTimeEpoch) && classMaster.isCarryForwardMyWork()) {
+        }else if(!isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork() || projectSetting.isCarryForwardMyWork())) {
             return dataInstanceMasterRepository.findDataInstanceByItemMasterIDAndStatus2(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID,instancesStatus);
 
         }
@@ -110,6 +117,7 @@ public class DataInstanceService {
 
     public List<DataInstanceMaster> findDataInstanceByIntervalWithClassMasterV1(Long dateTimeEpoch,Long zeroDateTimeEpoch,int instancesStatus,int projectStoreID){
         projectSetting projectSetting = projectSettingService.getSettingByProjectStoreID(projectStoreID);
+
         if(isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
             return dataInstanceMasterRepository.findDataInstanceByProjectStoreIDAndStatus(projectStoreID,instancesStatus);
         }else if(!isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
