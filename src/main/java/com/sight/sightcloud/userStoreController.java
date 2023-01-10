@@ -20,8 +20,10 @@ public class userStoreController {
     @PostMapping(path = "/api/userStore")
     public ResponseEntity<String> AddUser(@RequestBody UserStore userStore){
         try{
-            userStoreService.insertUser(userStore);
-            return ResponseEntity.status(200).body("success");
+            if(userStoreService.insertUser(userStore)) {
+                return ResponseEntity.status(200).body("success");
+            }
+            return  ResponseEntity.status(201).body("user exist");
         }catch (Exception e){
             return ResponseEntity.status(500).body("try again later");
         }
@@ -30,12 +32,13 @@ public class userStoreController {
 
 
     @PutMapping(path = "/api/userStore/update")
-    public ResponseEntity<String> updateUser(@RequestBody UserStore userStore){
+    public ResponseEntity<UserStore> updateUser(@RequestBody UserStore userStore){
+        UserStore _userStore = new UserStore();
         try{
-            userStoreService.insertUser(userStore);
-            return ResponseEntity.status(200).body("success");
+            _userStore = userStoreService.updateUser(userStore);
+            return ResponseEntity.status(200).body(_userStore);
         }catch (Exception e){
-            return ResponseEntity.status(500).body("try again later");
+            return ResponseEntity.status(500).body(_userStore);
         }
 
     }

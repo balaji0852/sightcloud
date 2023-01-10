@@ -46,8 +46,12 @@ public class userStoreService {
     public boolean insertUser(UserStore userStore){
 
         try {
-            UserStoreRepository.save(userStore);
-            return true;
+            UserStore _UserStore = UserStoreRepository.findBylinkedEmail(userStore.getLinkedEmail());
+            if(null==_UserStore){
+                UserStoreRepository.save(userStore);
+                return true;
+            }
+            return false;
         }catch (Exception E){
             return false;
         }
@@ -66,11 +70,26 @@ public class userStoreService {
         return false;
     }
 
-    public boolean updateUser(UserStore userStore){
-        if(UserStoreRepository.existsById(userStore.getUserStoreID())){
+    //balaji : 1/10/2023, modifying service to return a userStore
+    //                    email - super key <- will be provided in userStore, provided fields will be updated...
+    public UserStore updateUser(UserStore userStore){
+        UserStore _userStore = UserStoreRepository.findBylinkedEmail(userStore.getLinkedEmail());
+
+        userStore.setUserStoreID(_userStore.getUserStoreID());
+        userStore.setThemeID(userStore.getThemeID()==-1? _userStore.getThemeID() :userStore.getThemeID());
+        userStore.setDateViewPreference(userStore.getDateViewPreference()==-1?_userStore.getDateViewPreference():userStore.getDateViewPreference());
+        userStore.setTimeViewPreference(userStore.getTimeViewPreference()==-1?_userStore.getTimeViewPreference():userStore.getTimeViewPreference());
+        userStore.setUserName(userStore.getUserName().equals("empty")?_userStore.getUserName():userStore.getUserName());
+        userStore.setLinkedPhone(userStore.getLinkedPhone().equals("empty")?_userStore.getLinkedPhone():userStore.getLinkedPhone());
+        userStore.setPhotoURL(userStore.getPhotoURL().equals("empty")? _userStore.getPhotoURL() : userStore.getPhotoURL());
+
+        try{
             UserStoreRepository.save(userStore);
-            return true;
+        }catch (Exception e){
+            //what to do?
         }
-        return false;
+
+        return userStore;
+
     }
 }
