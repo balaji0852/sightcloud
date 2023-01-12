@@ -45,6 +45,28 @@ public class ClassMaster {
     @JoinColumn(name = "project_storeid")
     private ProjectStore projectStore;
 
+    private long createdDate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_storeid")
+    private UserStore userStore;
+
+    public long getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(long createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public UserStore getUserStore() {
+        return userStore;
+    }
+
+    public void setUserStore(UserStore userStore) {
+        this.userStore = userStore;
+    }
+
     public int getItemMasterID() {
         return itemMasterID;
     }

@@ -77,7 +77,11 @@ public class DataInstanceService {
         projectSetting projectSetting = projectSettingService.getSettingByProjectStoreID(classMaster.getProjectStore().getProjectStoreID());
 
         if(isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork() || projectSetting.isCarryForwardMyWork())) {
-            return dataInstanceMasterRepository.findDataInstanceByItemMasterID(itemMasterID);
+            //01/12/2023 :balaji , bug 1 <- adding this fix here
+            List<DataInstanceMaster> response = dataInstanceMasterRepository.findDataInstanceByItemMasterID(itemMasterID);
+            response.addAll(dataInstanceMasterRepository.findDataInstanceByOneIntervalV1(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID,3));
+            return response;
+
         }else if(!isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork() || projectSetting.isCarryForwardMyWork())) {
             return dataInstanceMasterRepository.findDataInstanceByItemMasterID2(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID);
         }
@@ -90,7 +94,11 @@ public class DataInstanceService {
         projectSetting projectSetting = projectSettingService.getSettingByProjectStoreID(projectStoreID);
 
         if(isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
-            return dataInstanceMasterRepository.findDataInstanceByProjectStoreID(projectStoreID);
+            //01/12/2023 :balaji , bug 1 <- adding this fix here
+            List<DataInstanceMaster> response = dataInstanceMasterRepository.findDataInstanceByProjectStoreID(projectStoreID);
+            response.addAll(dataInstanceMasterRepository.findDataInstanceByIntervalWithClassMasterV1(dateTimeEpoch,zeroDateTimeEpoch,3,projectStoreID));
+            return response;
+
         }else if(!isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
             return dataInstanceMasterRepository.findDataInstanceByProjectStoreID2(projectStoreID,dateTimeEpoch,zeroDateTimeEpoch);
         }
@@ -105,7 +113,12 @@ public class DataInstanceService {
         projectSetting projectSetting = projectSettingService.getSettingByProjectStoreID(classMaster.getProjectStore().getProjectStoreID());
 
         if(isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork() || projectSetting.isCarryForwardMyWork())) {
-            return dataInstanceMasterRepository.findDataInstanceByItemMasterIDAndStatus(itemMasterID,instancesStatus);
+            //01/12/2023 :balaji , bug 1 <- adding this fix here
+            List<DataInstanceMaster> response = dataInstanceMasterRepository.findDataInstanceByItemMasterIDAndStatus(itemMasterID,instancesStatus);
+            if(instancesStatus==3) {
+                response.addAll(dataInstanceMasterRepository.findDataInstanceByOneIntervalV1(dateTimeEpoch, zeroDateTimeEpoch, itemMasterID, 3));
+            }
+            return response;
 
         }else if(!isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork() || projectSetting.isCarryForwardMyWork())) {
             return dataInstanceMasterRepository.findDataInstanceByItemMasterIDAndStatus2(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID,instancesStatus);
@@ -119,7 +132,13 @@ public class DataInstanceService {
         projectSetting projectSetting = projectSettingService.getSettingByProjectStoreID(projectStoreID);
 
         if(isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
-            return dataInstanceMasterRepository.findDataInstanceByProjectStoreIDAndStatus(projectStoreID,instancesStatus);
+            //01/12/2023 :balaji , bug 1 <- adding this fix here
+            List<DataInstanceMaster> response = dataInstanceMasterRepository.findDataInstanceByProjectStoreIDAndStatus(projectStoreID,instancesStatus);
+            if(instancesStatus==3) {
+                response.addAll(dataInstanceMasterRepository.findDataInstanceByIntervalWithClassMasterV1(dateTimeEpoch, zeroDateTimeEpoch, 3, projectStoreID));
+            }
+            return response;
+
         }else if(!isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
             return dataInstanceMasterRepository.findDataInstanceByProjectStoreIDAndStatus2(projectStoreID,dateTimeEpoch,zeroDateTimeEpoch,instancesStatus);
         }
