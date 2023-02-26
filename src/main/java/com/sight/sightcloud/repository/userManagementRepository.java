@@ -14,10 +14,12 @@ import java.util.Optional;
 public interface userManagementRepository extends JpaRepository<UserManagementStore,Integer> {
 
 
-    Optional<UserManagementStore> findByUserStore_UserStoreID(int UserStoreID);
+    @Query(value = "SELECT * FROM  user_management_store u WHERE u.project_storeid=?2 and u.user_storeid=?1",nativeQuery = true)
+    UserManagementStore findByUserStoreID(int UserStoreID,int projectStoreID);
 
     @Query(value = "SELECT * from  user_management_store where project_storeid = ?1",nativeQuery = true)
     List<UserManagementStore> findAllUsersFromProject(int projectStoreID);
+
 
 
 

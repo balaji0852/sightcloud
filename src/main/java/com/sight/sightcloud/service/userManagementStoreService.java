@@ -50,12 +50,13 @@ public class userManagementStoreService {
 
     public int addUser(String inviteeMail, int projectStoreID){
         UserStore userStore = userStoreRepo.findBylinkedEmail(inviteeMail);
-        ProjectStore projectStore = projectStoreRepository.getById(projectStoreID);
+        ProjectStore projectStore = new ProjectStore();
+        projectStore.setProjectStoreID(projectStoreID);
 
         try {
             if (null != userStore) {
-                Optional<UserManagementStore> userToManage = userManagementRepository.findByUserStore_UserStoreID(userStore.getUserStoreID());
-                if (userToManage.isEmpty()) {
+                UserManagementStore userToManage = userManagementRepository.findByUserStoreID(userStore.getUserStoreID(),projectStoreID);
+                if (null==userToManage) {
                     //create user in userManagement
                     //respond 200, user created
                     UserManagementStore userToCreate = new UserManagementStore();
@@ -64,6 +65,7 @@ public class userManagementStoreService {
                     userToCreate.setInvited(true);
                     userToCreate.setState(1);
                     //state 1-was present in platform invited for the project
+                    userManagementRepository.save(userToCreate);
                     return 200;
                 } else {
                     //respond with 201, user exist
@@ -83,13 +85,13 @@ public class userManagementStoreService {
                 UserStore checkForUserStore = userStoreRepo.findBylinkedEmail(inviteeMail);
                 if(null!=checkForUserStore){
                     UserManagementStore userToCreate = new UserManagementStore();
-                    userToCreate.setUserStore(userStore);
+                    userToCreate.setUserStore(checkForUserStore);
                     userToCreate.setProjectStore(projectStore);
                     userToCreate.setInvited(true);
                     //state - 2, was invited to the project, hence forth platform created a account,
                     //need user offical login for userStore updates
                     userToCreate.setState(2);
-                    userStoreRepo.save(creatingUserStore);
+                    userManagementRepository.save(userToCreate);
                     return 200;
                 }
 
