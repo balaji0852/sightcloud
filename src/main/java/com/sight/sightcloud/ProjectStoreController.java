@@ -47,6 +47,10 @@ public class ProjectStoreController {
             userManagementStore.setUserStore(userStore);
             projectStore.setProjectStoreID(projectStoreID);
             userManagementStore.setProjectStore(projectStore);
+            //7/3/2023 : //balaji : 2/25/2023 user management installation adding state and isInvited;
+            userManagementStore.setInvited(false);
+            //7/3/2023 : balaji : project creator -state=3
+            userManagementStore.setState(3);
 
             //27/12/2022, adding project setting
             projectSetting projectSetting = new projectSetting();

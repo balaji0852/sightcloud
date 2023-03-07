@@ -68,7 +68,14 @@ public class userManagementStoreService {
                     userManagementRepository.save(userToCreate);
                     return 200;
                 } else {
-                    //respond with 201, user exist
+                    //user re enabling into project(case: user is in removed state in the project.
+                    if(userToManage.getState()==4) {
+                        //7/3/2023 - balaji :account will be reinitiated to project state=5(user reinitiated to project)
+                        userToManage.setState(5);
+                        userManagementRepository.save(userToManage);
+                        return 202;
+                    }
+                    //respond with 201, user exist(duplicate)
                     return 201;
                 }
             } else {

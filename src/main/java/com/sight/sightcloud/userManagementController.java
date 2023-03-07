@@ -33,7 +33,7 @@ public class userManagementController {
     }
 
     @PostMapping(path = "/api/addUserToProject")
-    public ResponseEntity<String> addUser(@RequestParam String inviteeMail,@RequestParam int projectStoreID){
+        public ResponseEntity<String> addUser(@RequestParam String inviteeMail,@RequestParam int projectStoreID){
 
         int Response = userManagmentStoreService.addUser(inviteeMail,projectStoreID);
         return ResponseEntity.status(Response).body(" ");
