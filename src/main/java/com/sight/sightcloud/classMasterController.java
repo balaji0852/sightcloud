@@ -1,6 +1,8 @@
 package com.sight.sightcloud;
 import com.sight.sightcloud.model.ClassMaster;
+import com.sight.sightcloud.model.UserStore;
 import com.sight.sightcloud.service.classMasterService;
+import com.sight.sightcloud.vo.DataInstanceMasterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +25,16 @@ public class classMasterController {
 
 
     @GetMapping("/api/classMaster/projectStore/{projectStoreID}")
-    public List<ClassMaster> getAllByProjectStoreID(@PathVariable int projectStoreID) {
+    public List<DataInstanceMasterVO> getAllByProjectStoreID(@PathVariable int projectStoreID) {
+        //return classMasterService.findClassMasterByProjectStoreID(projectStoreID);
+        return classMasterService.findClassMasterByPinAndLastComment(projectStoreID,2519);
+    }
+
+    @GetMapping("/api/classMaster/directory/projectStore")
+    public List<ClassMaster> getAllByProjectStoreID(@RequestParam int projectStoreID,@RequestParam int userStoreID) {
         return classMasterService.findClassMasterByProjectStoreID(projectStoreID);
     }
+
 
     //balaji - 6/9/22 - new requirement
     @GetMapping("/api/classMaster/id")
