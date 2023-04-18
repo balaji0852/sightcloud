@@ -22,7 +22,12 @@ public class directoryService {
 
     public boolean updateDirectory(pinnedClass pinnedClass){
         try{
-            directoryRepository.save(pinnedClass);
+            pinnedClass pin = directoryRepository.findPin(pinnedClass.getUserStore().getUserStoreID(),pinnedClass.getClassMaster().getItemMasterID());
+            if(null==pin && pinnedClass.isPinned()){
+                directoryRepository.save(pinnedClass);
+            }else{
+                directoryRepository.delete(pin);
+            }
             return true;
         }catch (Exception e){
             return false;

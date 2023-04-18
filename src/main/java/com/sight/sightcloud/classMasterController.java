@@ -25,14 +25,13 @@ public class classMasterController {
 
 
     @GetMapping("/api/classMaster/projectStore/{projectStoreID}")
-    public List<DataInstanceMasterVO> getAllByProjectStoreID(@PathVariable int projectStoreID) {
-        //return classMasterService.findClassMasterByProjectStoreID(projectStoreID);
-        return classMasterService.findClassMasterByPinAndLastComment(projectStoreID,2519);
+    public List<ClassMaster> getAllByProjectStoreID(@PathVariable int projectStoreID) {
+        return classMasterService.findClassMasterByProjectStoreID(projectStoreID);
     }
 
     @GetMapping("/api/classMaster/directory/projectStore")
-    public List<ClassMaster> getAllByProjectStoreID(@RequestParam int projectStoreID,@RequestParam int userStoreID) {
-        return classMasterService.findClassMasterByProjectStoreID(projectStoreID);
+    public List<DataInstanceMasterVO> findClassMasterByPinAndLastComment(@RequestParam int projectStoreID,@RequestParam int userStoreID) {
+        return classMasterService.findClassMasterByPinAndLastComment(projectStoreID,userStoreID);
     }
 
 

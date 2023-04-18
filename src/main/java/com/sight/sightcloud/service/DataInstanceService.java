@@ -12,10 +12,7 @@ import com.sight.sightcloud.repository.*;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.TimeZone;
+import java.util.*;
 
 @Service
 public class DataInstanceService {
@@ -75,14 +72,14 @@ public class DataInstanceService {
 
         //12/27/2022: balaji adding this to route project wide cfmw
         projectSetting projectSetting = projectSettingService.getSettingByProjectStoreID(classMaster.getProjectStore().getProjectStoreID());
-
-        if(isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork() || projectSetting.isCarryForwardMyWork())) {
+        //22/03/2023 : balaji : sale 24; commenting down || projectSetting.isCarryForwardMyWork()
+        if(isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork())) {
             //01/12/2023 :balaji , bug 1 <- adding this fix here
             List<DataInstanceMaster> response = dataInstanceMasterRepository.findDataInstanceByItemMasterID(itemMasterID);
             response.addAll(dataInstanceMasterRepository.findDataInstanceByOneIntervalV1(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID,3));
             return response;
 
-        }else if(!isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork() || projectSetting.isCarryForwardMyWork())) {
+        }else if(!isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork())) {
             return dataInstanceMasterRepository.findDataInstanceByItemMasterID2(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID);
         }
 
@@ -100,6 +97,7 @@ public class DataInstanceService {
             return response;
 
         }else if(!isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
+
             return dataInstanceMasterRepository.findDataInstanceByProjectStoreID2(projectStoreID,dateTimeEpoch,zeroDateTimeEpoch);
         }
 
@@ -111,8 +109,8 @@ public class DataInstanceService {
 
         //12/27/2022: balaji adding this to route project wide cfmw
         projectSetting projectSetting = projectSettingService.getSettingByProjectStoreID(classMaster.getProjectStore().getProjectStoreID());
-
-        if(isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork() || projectSetting.isCarryForwardMyWork())) {
+        //22/03/2023 : balaji : sale 24; commenting down || projectSetting.isCarryForwardMyWork()
+        if(isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork() )) {
             //01/12/2023 :balaji , bug 1 <- adding this fix here
             List<DataInstanceMaster> response = dataInstanceMasterRepository.findDataInstanceByItemMasterIDAndStatus(itemMasterID,instancesStatus);
             if(instancesStatus==3) {
@@ -120,7 +118,11 @@ public class DataInstanceService {
             }
             return response;
 
-        }else if(!isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork() || projectSetting.isCarryForwardMyWork())) {
+        }else if(!isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork())) {
+            //22/03/2023 : balaji , bug 8, adding cases for state 1 and 2, response should be [] empty, since cmfw is on
+            List<DataInstanceMaster> empty = new ArrayList<>();
+            if(instancesStatus==2 || instancesStatus==1)
+                return empty;
             return dataInstanceMasterRepository.findDataInstanceByItemMasterIDAndStatus2(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID,instancesStatus);
 
         }
@@ -140,6 +142,10 @@ public class DataInstanceService {
             return response;
 
         }else if(!isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
+            //22/03/2023 : balaji , bug 8, adding cases for state 1 and 2, response should be [] empty, since cmfw is on
+            List<DataInstanceMaster> empty = new ArrayList<>();
+            if(instancesStatus==2 || instancesStatus==1)
+                return empty;
             return dataInstanceMasterRepository.findDataInstanceByProjectStoreIDAndStatus2(projectStoreID,dateTimeEpoch,zeroDateTimeEpoch,instancesStatus);
         }
 
@@ -153,10 +159,10 @@ public class DataInstanceService {
 
 
     private boolean isPresentDay(Long dateTimeEpoch){
-        LocalDateTime dateTime = LocalDateTime.ofEpochSecond(dateTimeEpoch/1000,0,ZoneOffset.of("+05:30") );
+        LocalDateTime dateTime = LocalDateTime.ofEpochSecond(dateTimeEpoch,0,ZoneOffset.of("+00:00") );
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d,yyyy", Locale.ENGLISH);
         String date = formatter.format(dateTime);
-        System.out.println(formatter.format(dateTime));
+        System.out.println(" isPresentDay : icming time"+date+" - device time-"+formatter.format(LocalDateTime.now().atOffset(ZoneOffset.of("+05:30"))));
         return date.equals(formatter.format(LocalDateTime.now().atOffset(ZoneOffset.of("+05:30"))));
     }
 }

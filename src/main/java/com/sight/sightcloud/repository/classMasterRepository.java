@@ -22,7 +22,7 @@ public interface classMasterRepository  extends JpaRepository<ClassMaster,Intege
 
     @Query(value = "SELECT * FROM classMaster cm inner join pinnedclass pin\n" +
             "on pin.item_masterid=cm.item_masterid where pin.user_storeid=?1 AND pin.is_pinned=True " +
-            "AND cm.project_storeid=?2",nativeQuery = true)
+            "AND cm.project_storeid=?2 ",nativeQuery = true)
     List<ClassMaster> findAllPinnedCMForProjectStoreIDAndUserStoreID( int userStoreID,int projectStoreID);
 
 

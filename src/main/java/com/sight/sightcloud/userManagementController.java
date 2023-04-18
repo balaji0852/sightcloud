@@ -35,13 +35,13 @@ public class userManagementController {
     //9/3/2023 : Balaji - adding validation for email ,and removing white space
     @PostMapping(path = "/api/addUserToProject")
         public ResponseEntity<String> addUser(@RequestParam String inviteeMail,@RequestParam int projectStoreID){
-        inviteeMail.replaceAll("\\s","");
+        inviteeMail = inviteeMail.replaceAll("\\s","");
         if(!inviteeMail.contains("@") || !inviteeMail.contains(".")){
             return ResponseEntity.status(400).body("bad request {check the email for typos}");
         }
 
 
-        int Response = userManagmentStoreService.addUser(inviteeMail,projectStoreID);
+        int Response = userManagmentStoreService.addUser(inviteeMail.toLowerCase(),projectStoreID);
         return ResponseEntity.status(Response).body(" ");
     }
 }

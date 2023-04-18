@@ -2,6 +2,7 @@ package com.sight.sightcloud.service;
 
 import com.sight.sightcloud.model.ClassMaster;
 import com.sight.sightcloud.model.DataInstanceMaster;
+import com.sight.sightcloud.model.UserStore;
 import com.sight.sightcloud.repository.DataInstanceMasterRepository;
 import com.sight.sightcloud.repository.classMasterRepository;
 import com.sight.sightcloud.vo.DataInstanceMasterVO;
@@ -28,20 +29,17 @@ public class classMasterService {
 
     public List<ClassMaster> findClassMasterByProjectStoreID(int projectStoreID){
         return classMasterRepository.findAllProjectStoreID(projectStoreID);
-        //return findClassMasterByPinAndLastComment(projectStoreID,2519);
     }
 
     public List<DataInstanceMasterVO> findClassMasterByPinAndLastComment(int projectStoreID, int userStoreID){
         List<ClassMaster> pinnedClassMaster = classMasterRepository.findAllPinnedCMForProjectStoreIDAndUserStoreID(userStoreID,projectStoreID);
-        //List<ClassMaster> pinnedClassMaster =  new ArrayList<>();
         List<ClassMaster> allClassMasterForprojectStoreID = classMasterRepository.findAllProjectStoreID(projectStoreID);
-
-
-
 
         List<DataInstanceMasterVO> responseForpinned = new ArrayList<>();
         List<DataInstanceMasterVO> responseForNonPinnned = new ArrayList<>();
         List<DataInstanceMasterVO> emptyDataInstance = new ArrayList<>();
+
+
 
         for(ClassMaster cm : allClassMasterForprojectStoreID){
             Optional<DataInstanceMaster> temp = dataInstanceMasterRepository.findDataInstanceByLastComment(cm.getItemMasterID());
@@ -55,10 +53,9 @@ public class classMasterService {
                     responseForNonPinnned.add(dataInstanceMasterVO);
                 }
             }else{
-
                 dataInstanceMasterVO.setClassMaster(cm);
                 dataInstanceMasterVO.setPinnedForCurrentUser(pinnedClassMaster.contains(cm));
-                dataInstanceMasterVO.setUserStore(cm.getUserStore());
+                dataInstanceMasterVO.setUserStore(new UserStore());
                 dataInstanceMasterVO.setDataInstanceID(999);
                 dataInstanceMasterVO.setDataInstances("empty");
                 dataInstanceMasterVO.setInstanceTime(Long.MAX_VALUE);
@@ -66,19 +63,12 @@ public class classMasterService {
                 dataInstanceMasterVO.setDirectoryid(999);
                 emptyDataInstance.add(dataInstanceMasterVO);
             }
-
-            //sort both the array
-//            responseForpinned.sort(dataInstanceMasterVO.getInstanceTime());
-//           sortHelper sorts = new sortHelper();
-
-
         }
 
         Collections.sort(responseForpinned);
         Collections.sort(responseForNonPinnned);
-
-        responseForpinned.addAll(responseForNonPinnned);
         responseForpinned.addAll(emptyDataInstance);
+        responseForpinned.addAll(responseForNonPinnned);
         return responseForpinned;
     }
 

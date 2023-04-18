@@ -101,8 +101,13 @@ public class DataInstanceMasterVO implements Comparable<DataInstanceMasterVO> {
         classMaster = dataInstanceMaster.getClassMaster();
     }
 
+
+
+
+
     @Override
     public int compareTo(DataInstanceMasterVO dataInstanceMasterVO) {
         return (int) (dataInstanceMasterVO.getInstanceTime()-instanceTime);
     }
 }
+
