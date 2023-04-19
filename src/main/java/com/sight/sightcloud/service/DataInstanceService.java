@@ -146,7 +146,7 @@ public class DataInstanceService {
             List<DataInstanceMaster> empty = new ArrayList<>();
             if(instancesStatus==2 || instancesStatus==1)
                 return empty;
-            return dataInstanceMasterRepository.findDataInstanceByProjectStoreIDAndStatus2(projectStoreID,dateTimeEpoch,zeroDateTimeEpoch,instancesStatus);
+             return dataInstanceMasterRepository.findDataInstanceByProjectStoreIDAndStatus2(projectStoreID,dateTimeEpoch,zeroDateTimeEpoch,instancesStatus);
         }
 
         return dataInstanceMasterRepository.findDataInstanceByIntervalWithClassMasterV1(dateTimeEpoch,zeroDateTimeEpoch,instancesStatus,projectStoreID);
@@ -159,10 +159,10 @@ public class DataInstanceService {
 
 
     private boolean isPresentDay(Long dateTimeEpoch){
-        LocalDateTime dateTime = LocalDateTime.ofEpochSecond(dateTimeEpoch,0,ZoneOffset.of("+00:00") );
+        LocalDateTime dateTime = LocalDateTime.ofEpochSecond(dateTimeEpoch/1000,0,ZoneOffset.of("+00:00") );
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d,yyyy", Locale.ENGLISH);
         String date = formatter.format(dateTime);
-        System.out.println(" isPresentDay : icming time"+date+" - device time-"+formatter.format(LocalDateTime.now().atOffset(ZoneOffset.of("+05:30"))));
-        return date.equals(formatter.format(LocalDateTime.now().atOffset(ZoneOffset.of("+05:30"))));
+        System.out.println(dateTimeEpoch/1000+" - "+dateTimeEpoch+" isPresentDay : icming time"+date+" - device time-"+formatter.format(LocalDateTime.now()));
+        return date.equals(formatter.format(LocalDateTime.now()));
     }
 }

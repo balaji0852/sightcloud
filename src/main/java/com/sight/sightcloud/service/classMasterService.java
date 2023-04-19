@@ -38,6 +38,7 @@ public class classMasterService {
         List<DataInstanceMasterVO> responseForpinned = new ArrayList<>();
         List<DataInstanceMasterVO> responseForNonPinnned = new ArrayList<>();
         List<DataInstanceMasterVO> emptyDataInstance = new ArrayList<>();
+        List<DataInstanceMasterVO> emptyCMPinned = new ArrayList<>();
 
 
 
@@ -53,22 +54,37 @@ public class classMasterService {
                     responseForNonPinnned.add(dataInstanceMasterVO);
                 }
             }else{
+                UserStore emptyUser = new UserStore();
+                emptyUser.setPhotoURL("empty");
+                emptyUser.setUserName("empty");
+                emptyUser.setLinkedPhone("empty");
+                emptyUser.setLinkedEmail("empty");
+                emptyUser.setDateViewPreference(0);
+                emptyUser.setThemeID(0);
+                emptyUser.setUserStoreID(0);
+                emptyUser.setTimeViewPreference(0);
                 dataInstanceMasterVO.setClassMaster(cm);
                 dataInstanceMasterVO.setPinnedForCurrentUser(pinnedClassMaster.contains(cm));
-                dataInstanceMasterVO.setUserStore(new UserStore());
+                dataInstanceMasterVO.setUserStore(emptyUser);
                 dataInstanceMasterVO.setDataInstanceID(999);
                 dataInstanceMasterVO.setDataInstances("empty");
                 dataInstanceMasterVO.setInstanceTime(Long.MAX_VALUE);
                 dataInstanceMasterVO.setInstancesStatus(999);
                 dataInstanceMasterVO.setDirectoryid(999);
-                emptyDataInstance.add(dataInstanceMasterVO);
+                if(pinnedClassMaster.contains(cm)){
+                    emptyCMPinned.add(dataInstanceMasterVO);
+                }else{
+                    emptyDataInstance.add(dataInstanceMasterVO);
+                }
             }
         }
 
         Collections.sort(responseForpinned);
         Collections.sort(responseForNonPinnned);
-        responseForpinned.addAll(emptyDataInstance);
+        responseForpinned.addAll(emptyCMPinned);
         responseForpinned.addAll(responseForNonPinnned);
+        responseForpinned.addAll(emptyDataInstance);
+
         return responseForpinned;
     }
 
