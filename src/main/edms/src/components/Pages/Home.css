@@ -1,0 +1,22 @@
+.home {
+    display: block;
+    /*20j22 adding no class item description, need row wise items
+    flex-wrap: wrap; 
+    /*19j22-width was in vw , was oversizing the screen with vw, moved %*/
+    width: 100%;
+    text-align: start;
+    font-size: 20px; 
+      /* 16 aug 2022: bs/ removing padding
+    /* padding: 5px; */
+
+}
+
+
+@media (max-width:550px) {
+  .home {
+    width: 90%;
+  }
+}
+
+
+

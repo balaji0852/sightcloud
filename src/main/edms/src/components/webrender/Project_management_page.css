@@ -1,0 +1,63 @@
+.PMPage{
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;    
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    padding: 10px;
+    font-size: 11px;
+}
+
+
+.PMPageDark{
+    background-color: black;
+    color: white;
+}
+
+
+
+
+
+.CFMWTitle{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+.CFMW{
+    display: flex;
+}
+
+
+.toggle{
+    width: 130px;
+    margin-left: 7px;
+    margin-right: 4px;
+}
+
+.line{
+    margin-top: 15px;
+    height: 0.5px;
+    width: 100%;
+    color: transparent;
+   
+}
+
+.liteLine{
+    background-color: black;
+}
+
+.darkLine{
+    background-color: white;
+}
+
+.projectdetails{
+    margin: 10px;
+    padding: 10px;
+}
+
+
+.Service-tier-details{
+    display: flex;
+}
+
+

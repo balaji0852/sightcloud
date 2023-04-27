@@ -1,0 +1,198 @@
+﻿/* html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+} */
+
+
+/* balaji: makes the app 100% fit to viewport */
+.app {
+  background-color: aliceblue;
+  height: 100vh;
+}
+
+
+/* ............................................................ */
+/* Balaji -> changing code from v 1.0 locoflow template  */
+
+.nav {
+  background-color: aliceblue;
+  height: 50px;
+  width: 100vw;
+  padding: 10px;
+  display: flexBox;
+  position: fixed;
+  top: 0;
+  /* 16 aug 2022: bs/ we are getting left margin in the nav, added left-0 */
+  left: 0;
+}
+
+
+
+.navBarIcon {
+  margin-right: 20px;
+}
+
+select:focus,
+select:active,
+select {
+  outline: none;
+  border: none;
+  background-color: whitesmoke;
+  margin-left: 60px;
+}
+
+.navRight {
+  margin-left: auto;
+  padding-right: 20px;
+  justify-content: space-between;
+}
+
+
+.icon {
+  margin-left: 20px;
+  margin-left: 20px;
+}
+
+
+.appBody {
+  background-color: white;
+  display: flex;
+}
+
+
+
+.sideBar {
+  background-color:aliceblue;
+  width:60px;
+  height: 100vh;
+  padding: 5px;
+  display: flexBox;
+  position: fixed;
+  top: 50px;
+  /* 16 aug 2022: bs/ we are getting left margin in the nav, added left-0 */
+  left: 0;
+  z-index: 1;
+  text-align: start;
+}
+
+.sideBarOpen {
+  background-color: aliceblue;
+  width: 230px;
+  height: 100vh;
+  padding: 5px;
+  display: flexbox;
+  position: fixed;
+  top: 50px;
+   /* 16 aug 2022: bs/ we are getting left margin in the nav, added left-0 */
+  left: 0;
+  z-index: 1;
+  text-align: start;
+}
+
+
+
+
+.sideBarIconsPadding {
+  margin: 10px;
+  font-size: medium;
+  border-radius: 4px;
+}
+
+.sideBarIconsPadding:hover{
+  background-color: white;
+}
+
+.sideBarIconsPaddingActive{
+  background-color: skyblue;
+}
+
+.link{
+  color: black;
+}
+
+.link:hover{
+  color: darkblue;
+  text-decoration: none;
+}
+
+
+.body {
+
+  /* Balaji:28/2/2023 - bug 24 commenting below line */
+  /* margin-top: 50px; */
+  height: 100vh;
+  width: 80vw;
+}
+
+.body2 {
+  /* Balaji:28/2/2023 - bug 24  -commenting below line*/
+  /* margin-top: 50px; */
+  height: 100vh;
+  width: 90vw;
+}
+
+
+
+
+/* @media (max-width:2400px) {s
+  .body {
+    width: 87vw;
+    background-color: rebeccapurple;
+  }
+  
+} */
+
+
+
+
+/* @media (max-width:2800px) {
+  .body {
+    width: 87vw;
+    background-color: green;
+  }
+  
+} */
+
+
+
+.body_left_margin_max{
+  margin-left: 230px;
+}
+.body_left_margin_min{
+  margin-left: 60px;
+}
+
+@media (max-width:550px) {
+  .sideBar {
+    width: 50px;
+  }
+  .body_left_margin_min{
+    margin-left: 55px;
+  }
+
+
+  
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

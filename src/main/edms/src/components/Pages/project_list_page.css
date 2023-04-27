@@ -1,0 +1,26 @@
+.project_list_page{
+    margin: 20px;
+}
+
+
+.header{
+    display: flex;
+}
+
+.project_header{
+    display: flex;
+    font-size: larger;
+    margin-top: 25px;
+}
+
+.project_description{
+    margin-left: 20px;
+}
+
+.create_project{
+    display: flex;
+    margin-right: 100px;
+    justify-content: flex-end;
+}
+
+

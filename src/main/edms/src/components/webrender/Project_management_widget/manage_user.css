@@ -1,0 +1,75 @@
+.EmailBox{
+    display: block;
+    height: 120px;
+    
+    margin-top: 20px;
+    border-radius: 15px 15px 0 0;
+    padding: 10px;
+}
+
+.darkEmailBox{
+    background-color: #161616;
+}
+
+.liteEmailBox{
+    background-color:#cccccc;
+    color: black;
+}
+
+
+#filled-basic{
+    color: white;
+}
+
+.fullWidth{
+    width: 100%;
+    display: flex;
+    }
+
+
+#muibutton{
+    margin: 10px;
+    margin-left: 20px;
+}
+
+.userblocks{
+    width: 100%;
+    height: 35px;
+    margin: 10px;
+    padding: 10px;
+  
+}
+
+.ubHeight{
+    height: 70px;
+}
+
+.actionLayout{
+    display: flex;
+}
+
+.userName{
+    display: flex;
+    width: 85%;
+    font-size: small;
+    overflow-x: hidden;
+}
+
+.activator{
+    width: 15%;
+}
+
+.userDetails{
+    font-size: xx-small;
+    color: #2196F3;
+}
+
+
+.actionArea{
+    width: 84%;
+    text-align: end;
+}
+
+.actionButton{
+    color: #2196F3;
+}

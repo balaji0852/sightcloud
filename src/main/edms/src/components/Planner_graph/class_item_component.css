@@ -1,0 +1,111 @@
+.classItemComponent{
+    width: 240px ;
+    height: 240px;
+    background-color:yellow;
+    padding: 5px;
+    margin: 2px;
+    border-top-left-radius: 13%;
+    border-top-right-radius: 13%;
+}
+
+.h4{
+    width: 230px;
+    height: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+            line-clamp: 2; 
+    -webkit-box-orient: vertical;
+}
+
+.topItems{
+    display: flex;
+    /*25/07/2022 adding fixed height & weight to avoid empty div not shown issue. */
+    height: 90px;
+    width: 220px;
+    
+}
+
+.editIcon{
+    margin-top: 20px;
+    width: 20px;
+}
+
+.description{
+    height: 80px;
+    width: 210px;
+    font-size: small;
+    font-weight: 500;
+    /* overflow: hidden;
+    white-space: nowrap;
+    max-lines: 3;
+    text-overflow: ellipsis; */
+    
+}
+
+.lastComment{
+    margin: 2px;
+    height: 50px;
+    background-color:white;
+    display: none;
+    padding: 2px;
+    font-weight: 600;
+    font-size: x-small;
+}
+
+.limitingText{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+            line-clamp: 2; 
+    -webkit-box-orient: vertical;
+}
+
+@media (max-width: 550px){
+    .classItemComponent{
+        width: 46% ;
+        height: 155px;
+        background-color:yellow;
+        margin:  1px;
+    }
+
+    .topItems{
+        height: 40%;
+        width: 95%;
+        margin: auto;
+        overflow: hidden;
+    }
+    
+    .h4{
+        width: 95%;
+        font-size: 16px;
+    }
+
+    .editIcon{
+        margin-top: 3px;
+        width: 12px;
+    }
+
+    .description{
+        margin-top: 4px;
+        height: 30%;
+        width: 100%;
+        padding: 2px;
+        font-weight: 600;
+        font-size: 9px;
+    }
+
+    .lastComment{
+        margin: auto;
+        height: 27%;
+        font-size: 8px;
+    }
+}
+
+
+.menu{
+    background-color: rebeccapurple;
+    position:absolute;
+}

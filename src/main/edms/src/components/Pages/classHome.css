@@ -1,0 +1,16 @@
+.classHome{
+    padding: 1px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    text-align: start;
+
+    /* Balaji:28/2/2023 - bug 24  */
+    padding-top: 100px;
+  }
+
+
+  @media (max-width:550px) {
+    .classHome{
+    }
+  }

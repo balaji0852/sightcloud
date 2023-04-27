@@ -159,10 +159,10 @@ public class DataInstanceService {
 
 
     private boolean isPresentDay(Long dateTimeEpoch){
-        LocalDateTime dateTime = LocalDateTime.ofEpochSecond(dateTimeEpoch/1000,0,ZoneOffset.of("+00:00") );
+        LocalDateTime dateTime = LocalDateTime.ofEpochSecond(dateTimeEpoch/1000,0,ZoneOffset.of("+05:30") );
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d,yyyy", Locale.ENGLISH);
         String date = formatter.format(dateTime);
-        System.out.println(dateTimeEpoch/1000+" - "+dateTimeEpoch+" isPresentDay : icming time"+date+" - device time-"+formatter.format(LocalDateTime.now()));
+        System.out.println(dateTimeEpoch/1000+" - "+dateTimeEpoch+" isPresentDay : icming time"+date+" - device time-"+formatter.format(LocalDateTime.now())+" full date");
         return date.equals(formatter.format(LocalDateTime.now()));
     }
 }

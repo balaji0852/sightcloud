@@ -1,0 +1,29 @@
+.classForm{
+    max-width: 1100px; 
+    /* Balaji:28/2/2023 - bug 24, commenting below line  */
+    /* margin-top: 40px; */
+    /* --------------------------- */
+    /* 16/8/2022: bal - removing the padding */
+    /* padding-left: 230px; */
+    text-align: start;
+    
+     /* Balaji:28/2/2023 - bug 24  */
+     padding-top: 85px;
+
+}
+
+.line{
+    width: 100wh;
+}
+
+.description{
+    height: 300px;
+}
+
+
+@media (max-width:550px) {
+    .classForm{
+        width: 75vw;
+        font-size: medium;
+    }
+}

@@ -1,0 +1,28 @@
+.project{
+    padding: 20px;
+}
+
+
+.header{
+    display: flex;
+}
+
+h1{
+    padding-left: 30px;
+}
+
+.link{
+    color: black;
+    
+}
+
+.link:hover{
+    color:black;
+  }
+
+.form{
+    margin-top: 50px;
+    max-width: 1000px;
+    margin-bottom: 50px;
+}
+  

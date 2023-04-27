@@ -1,0 +1,17 @@
+.colorStore{
+ display: flex;
+ flex-wrap: wrap;
+ /* overflow-x: auto; */
+}
+
+.colorItem{
+    width: 65px;
+    height: 35px;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.selectedColorItem{
+    border-style: solid;
+    border-color:black;
+}

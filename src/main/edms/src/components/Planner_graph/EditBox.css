@@ -1,0 +1,108 @@
+.bottom-bar{
+    /* width: 70%; */
+    /* height: 60%; */
+    background-color: whitesmoke;
+    /* position: fixed;
+    bottom: 0;
+    right: 0; */
+    font-size: 80px;
+    width: 100%;
+}
+
+.text-box{
+    margin-top: 5%;
+    width: 100%;
+}
+
+
+.disable{
+    display: none;
+}
+
+
+.action-box{
+    /* position: absolute; */
+    /* bottom: 5%;
+    right: 5%; */
+    height: 6%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.EditBox{
+    width: 70%; 
+    height: 600px;
+    padding: 3%;
+    background-color: whitesmoke;
+    position: fixed;
+    top: 15%;
+    overflow-y: auto;
+    enable-background: accumulate;
+}
+
+
+.gd-adjusted{
+    margin-right: 19%;
+    margin-left: 5%;
+}
+
+.icon:hover{
+    width: 70px;
+    height: 70px;
+    border-radius: 15px;
+}
+
+.gd-mid{
+    margin-right: 13%;
+    margin-left: 13%;
+}
+
+.gd{
+    height: 100%;
+}
+
+.graph-dialog{
+    display: flex;
+    height: 100%;
+}
+
+.main{
+    display: flex;
+    /* height: 100%; */
+}
+
+.move-right,.move-left{
+    display: flex;
+    height: 100%;
+    width: 10%;
+    align-items: center;
+}
+
+.itemName,.description-gd,.dataInstances-gd{
+    display: flex;
+    text-align: justify;
+    /* width: 100%; */
+}
+
+.dataInstances-gd{
+    margin-top: 35px;
+    font-size: medium;
+    white-space: pre-wrap;
+}
+
+
+.main-datainstances{
+    width: 70%;
+}
+
+
+.action-datainstances{
+    margin-top: 35px;
+    margin-left: 30px;
+    width: 30%;
+}
+
+
+.main-2{
+    display: flex;
+}
