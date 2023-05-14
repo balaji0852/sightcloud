@@ -109,7 +109,7 @@ public class classMasterService {
 
     public Boolean deleteClassMaster(int itemMasterID){
         if(classMasterRepository.existsById(itemMasterID)){
-            ClassMaster classMaster = classMasterRepository.getById(itemMasterID);
+            ClassMaster classMaster = classMasterRepository.findByItemMasterID(itemMasterID);
             classMasterRepository.delete(classMaster);
           return  true;
         }

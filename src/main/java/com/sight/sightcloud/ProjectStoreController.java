@@ -60,7 +60,7 @@ public class ProjectStoreController {
 
 
             if(userManagementStoreService.createProjectUser(userManagementStore) && projectSettingService.addSetting(projectSetting)) {
-                return ResponseEntity.status(200).body("success");
+                return ResponseEntity.status(200).body(Integer.toString(projectStoreID));
             }
             return ResponseEntity.status(201).body("success-contact admin");
         }

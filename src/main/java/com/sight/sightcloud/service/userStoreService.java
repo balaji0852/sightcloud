@@ -43,11 +43,14 @@ public class userStoreService {
         //}
     }
 
+    //balaji : 14/05/2023: setting default theme(dark:1) and view(1 day view)
     public boolean insertUser(UserStore userStore){
 
         try {
             UserStore _UserStore = UserStoreRepository.findBylinkedEmail(userStore.getLinkedEmail());
             if(null==_UserStore){
+                userStore.setThemeID(1);
+                userStore.setDateViewPreference(1);
                 UserStoreRepository.save(userStore);
                 return true;
             }

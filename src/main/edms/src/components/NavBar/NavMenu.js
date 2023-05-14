@@ -78,6 +78,11 @@ class NavMenu extends Component {
     }
 
 
+    updatePath = (path) =>{
+        console.log(path);
+    }
+
+
     render() {
 
         return (
@@ -134,7 +139,7 @@ class NavMenu extends Component {
                         </Link>
                     </div>
                     <div className={this.state.valSideBar ? 'body_left_margin_max body' : 'body_left_margin_min body2'}>
-                        <Breadcrumb updatePath={(value) => { console.log(value) }} />
+                        <Breadcrumb updatePathThroughProp={this.updatePath}  />
                         {/* {this.props.children} */}
                         <Switch>
                             <Route path="/dashboard/home" component={Home} />
