@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.sight.sightcloud.repository.*;
+
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -75,12 +77,20 @@ public class DataInstanceService {
         //22/03/2023 : balaji : sale 24; commenting down || projectSetting.isCarryForwardMyWork()
         if(isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork())) {
             //01/12/2023 :balaji , bug 1 <- adding this fix here
-            List<DataInstanceMaster> response = dataInstanceMasterRepository.findDataInstanceByItemMasterID(itemMasterID);
+            List<DataInstanceMaster> response = dataInstanceMasterRepository.findDataInstanceByItemMasterID(itemMasterID,zeroDateTimeEpoch);
+            //06/06/2023 : fitting ttc: findDataInstanceByItemMasterID(itemMasterID) should be only looking for dataInstance until eod
             response.addAll(dataInstanceMasterRepository.findDataInstanceByOneIntervalV1(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID,3));
             return response;
 
-        }else if(!isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork())) {
-            return dataInstanceMasterRepository.findDataInstanceByItemMasterID2(dateTimeEpoch,zeroDateTimeEpoch,itemMasterID);
+        }else if(!isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork())
+                && (zeroDateTimeEpoch/1000)<(LocalDateTime.now().toEpochSecond( ZoneOffset.of("+05:30")))){
+            //06/06/2023 : fitting ttc: strictly hard coding the findDataInstanceByItemMasterID2 to status 3, should
+            //              be modified
+            //06/06/2023 : fitting ttc: modifiy findDataInstanceByItemMasterID2 to take in instanceStatus
+            //                      have tertiary condition if dateTimeEpoch<currentTime ? 3:instanceStatus
+            //                      instead replacing it by findDataInstanceByOneIntervalV1
+            //if(LocalDateTime.now().toEpochSecond( ZoneOffset.of("+05:30"))<zeroDateTimeEpoch) {
+            return dataInstanceMasterRepository.findDataInstanceByItemMasterID2(dateTimeEpoch, zeroDateTimeEpoch, itemMasterID);
         }
 
 
@@ -92,12 +102,19 @@ public class DataInstanceService {
 
         if(isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
             //01/12/2023 :balaji , bug 1 <- adding this fix here
-            List<DataInstanceMaster> response = dataInstanceMasterRepository.findDataInstanceByProjectStoreID(projectStoreID);
+            //06/06/2023 : fitting ttc: findDataInstanceByItemMasterID(itemMasterID) should be only looking for dataInstance until eod
+            List<DataInstanceMaster> response = dataInstanceMasterRepository.findDataInstanceByProjectStoreID(projectStoreID,zeroDateTimeEpoch);
             response.addAll(dataInstanceMasterRepository.findDataInstanceByIntervalWithClassMasterV1(dateTimeEpoch,zeroDateTimeEpoch,3,projectStoreID));
             return response;
 
-        }else if(!isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
-
+        }else if(!isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()
+                && (zeroDateTimeEpoch/1000)<(LocalDateTime.now().toEpochSecond( ZoneOffset.of("+05:30")))){
+            //06/06/2023 : fitting ttc: strictly hard coding the findDataInstanceByItemMasterID2 to status 3, should
+            //              be modified
+            //06/06/2023 : fitting ttc: modifiy findDataInstanceByItemMasterID2 to take in instanceStatus
+            //                      have tertiary condition if dateTimeEpoch<currentTime ? 3:instanceStatus
+            //                      instead replacing it by findDataInstanceByOneIntervalV1
+            //if(LocalDateTime.now().toEpochSecond( ZoneOffset.of("+05:30"))<zeroDateTimeEpoch) {
             return dataInstanceMasterRepository.findDataInstanceByProjectStoreID2(projectStoreID,dateTimeEpoch,zeroDateTimeEpoch);
         }
 
@@ -112,13 +129,14 @@ public class DataInstanceService {
         //22/03/2023 : balaji : sale 24; commenting down || projectSetting.isCarryForwardMyWork()
         if(isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork() )) {
             //01/12/2023 :balaji , bug 1 <- adding this fix here
-            List<DataInstanceMaster> response = dataInstanceMasterRepository.findDataInstanceByItemMasterIDAndStatus(itemMasterID,instancesStatus);
+            List<DataInstanceMaster> response = dataInstanceMasterRepository.findDataInstanceByItemMasterIDAndStatus(itemMasterID,instancesStatus,zeroDateTimeEpoch);
             if(instancesStatus==3) {
                 response.addAll(dataInstanceMasterRepository.findDataInstanceByOneIntervalV1(dateTimeEpoch, zeroDateTimeEpoch, itemMasterID, 3));
             }
             return response;
 
-        }else if(!isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork())) {
+        }else if(!isPresentDay(dateTimeEpoch) && (classMaster.isCarryForwardMyWork())
+                && (zeroDateTimeEpoch/1000)<(LocalDateTime.now().toEpochSecond( ZoneOffset.of("+05:30")))){
             //22/03/2023 : balaji , bug 8, adding cases for state 1 and 2, response should be [] empty, since cmfw is on
             List<DataInstanceMaster> empty = new ArrayList<>();
             if(instancesStatus==2 || instancesStatus==1)
@@ -135,13 +153,14 @@ public class DataInstanceService {
 
         if(isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
             //01/12/2023 :balaji , bug 1 <- adding this fix here
-            List<DataInstanceMaster> response = dataInstanceMasterRepository.findDataInstanceByProjectStoreIDAndStatus(projectStoreID,instancesStatus);
+            List<DataInstanceMaster> response = dataInstanceMasterRepository.findDataInstanceByProjectStoreIDAndStatus(projectStoreID,instancesStatus,zeroDateTimeEpoch);
             if(instancesStatus==3) {
                 response.addAll(dataInstanceMasterRepository.findDataInstanceByIntervalWithClassMasterV1(dateTimeEpoch, zeroDateTimeEpoch, 3, projectStoreID));
             }
             return response;
 
-        }else if(!isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()){
+        }else if(!isPresentDay(dateTimeEpoch) && projectSetting.isCarryForwardMyWork()
+                && (zeroDateTimeEpoch/1000)<(LocalDateTime.now().toEpochSecond( ZoneOffset.of("+05:30")))){
             //22/03/2023 : balaji , bug 8, adding cases for state 1 and 2, response should be [] empty, since cmfw is on
             List<DataInstanceMaster> empty = new ArrayList<>();
             if(instancesStatus==2 || instancesStatus==1)

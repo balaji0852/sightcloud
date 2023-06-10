@@ -35,16 +35,17 @@ public interface DataInstanceMasterRepository extends JpaRepository<DataInstance
 
 
 
-    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE  d.instancesStatus!=3 and d.classMaster.itemMasterID =?1")
-    List<DataInstanceMaster> findDataInstanceByItemMasterID( int itemMasterID);
+    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE  d.instancesStatus!=3 and d.classMaster.itemMasterID =?1 and d.instanceTime<=?2")
+    List<DataInstanceMaster> findDataInstanceByItemMasterID( int itemMasterID,long tillEOD);
 
     @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.instanceTime>=?1 and d.instanceTime<=?2  and d.instancesStatus=3 and d.classMaster.itemMasterID =?3")
     List<DataInstanceMaster> findDataInstanceByItemMasterID2(Long dateTimeEpoch,Long zeroDateTimeEpoch, int itemMasterID);
 
 
 
-    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE  d.instancesStatus!=3 and d.instancesStatus= ?2  and d.classMaster.itemMasterID =?1")
-    List<DataInstanceMaster> findDataInstanceByItemMasterIDAndStatus( int itemMasterID,int instancesStatus);
+    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE  d.instancesStatus!=3 and d.instancesStatus= ?2  and d.classMaster.itemMasterID =?1 and d.instanceTime<=?3")
+    List<DataInstanceMaster> findDataInstanceByItemMasterIDAndStatus( int itemMasterID,int instancesStatus,long tillEOD);
+
 
     @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE  d.instanceTime>=?1 and d.instanceTime<=?2  and  d.instancesStatus = 3 and d.classMaster.itemMasterID =?3")
     List<DataInstanceMaster> findDataInstanceByItemMasterIDAndStatus2(Long dateTimeEpoch,Long zeroDateTimeEpoch, int itemMasterID,int instancesStatus);
@@ -52,15 +53,15 @@ public interface DataInstanceMasterRepository extends JpaRepository<DataInstance
 
 
 
-    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.instancesStatus!=3 and d.classMaster.projectStore.ProjectStoreID =?1")
-    List<DataInstanceMaster> findDataInstanceByProjectStoreID( int projectStoreID);
+    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE d.instancesStatus!=3 and d.classMaster.projectStore.ProjectStoreID =?1 and d.instanceTime<=?2")
+    List<DataInstanceMaster> findDataInstanceByProjectStoreID( int projectStoreID, long tillEOD);
 
     @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE  d.instancesStatus=3 and d.classMaster.projectStore.ProjectStoreID =?1 and d.instanceTime>=?2 and d.instanceTime<=?3")
     List<DataInstanceMaster> findDataInstanceByProjectStoreID2( int projectStoreID,Long dateTimeEpoch,Long zeroDateTimeEpoch);
 
 
-    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE  d.instancesStatus!=3 and d.instancesStatus =?2 and d.classMaster.projectStore.ProjectStoreID =?1")
-    List<DataInstanceMaster> findDataInstanceByProjectStoreIDAndStatus( int projectStoreID,int instancesStatus);
+    @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE  d.instancesStatus!=3 and d.instancesStatus =?2 and d.classMaster.projectStore.ProjectStoreID =?1 and d.instanceTime<=?3")
+    List<DataInstanceMaster> findDataInstanceByProjectStoreIDAndStatus( int projectStoreID,int instancesStatus,long tillEOD);
 
     @Query(value = "SELECT d FROM  DataInstanceMaster d WHERE  d.instancesStatus=3 and d.classMaster.projectStore.ProjectStoreID =?1 and d.instanceTime>=?2 and d.instanceTime<=?3")
     List<DataInstanceMaster> findDataInstanceByProjectStoreIDAndStatus2( int projectStoreID,Long dateTimeEpoch,Long zeroDateTimeEpoch,int instancesStatus);
