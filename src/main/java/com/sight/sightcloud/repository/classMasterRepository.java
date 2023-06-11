@@ -13,7 +13,7 @@ public interface classMasterRepository  extends JpaRepository<ClassMaster,Intege
 
     //query classMaster by projectStoreID
 
-    @Query(value = "SELECT * FROM classMaster   WHERE project_storeid =?1",nativeQuery = true)
+    @Query(value = "SELECT * FROM classMaster cm  WHERE project_storeid =?1 ",nativeQuery = true)
     List<ClassMaster> findAllProjectStoreID(int projectStoreID);
 
 

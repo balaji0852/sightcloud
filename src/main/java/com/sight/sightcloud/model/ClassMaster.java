@@ -1,6 +1,8 @@
 package com.sight.sightcloud.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Set;
 
 @Entity
@@ -137,6 +139,25 @@ public class ClassMaster {
 
     public void setProjectStore(ProjectStore projectStore) {
         this.projectStore = projectStore;
+    }
+
+
+    //Balaji : 10/6/2023 : self char development
+    public ClassMaster createSelfChatClassMaster(UserStore userStore,ProjectStore projectStore){
+        this.itemName = "self chat";
+        this.categoryID = 1;// indicates its self chat
+        this.subCategoryID = 0;
+        this.itemClassColorID = 3;//sky blue color
+        this.itemPriority = 1;
+        this.isItemCommentable = 1;
+        this.description = userStore.getUserName()+"(you)";
+        this.carryForwardMyWork = true;
+        this.projectStore = projectStore;
+        this.userStore =  userStore;
+        this.createdDate = (LocalDateTime.now().toEpochSecond( ZoneOffset.of("+05:30")))*1000;
+
+
+        return this;
     }
 
 }

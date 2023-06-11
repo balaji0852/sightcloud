@@ -43,38 +43,40 @@ public class classMasterService {
 
 
         for(ClassMaster cm : allClassMasterForprojectStoreID){
-            Optional<DataInstanceMaster> temp = dataInstanceMasterRepository.findDataInstanceByLastComment(cm.getItemMasterID());
-            DataInstanceMasterVO dataInstanceMasterVO = new DataInstanceMasterVO();
+            if(cm.getCategoryID()!=1 || (cm.getUserStore().getUserStoreID()==userStoreID)) {
+                Optional<DataInstanceMaster> temp = dataInstanceMasterRepository.findDataInstanceByLastComment(cm.getItemMasterID());
+                DataInstanceMasterVO dataInstanceMasterVO = new DataInstanceMasterVO();
 
-            if(temp.isPresent()){
-                dataInstanceMasterVO.setDataInstanceMaster(temp.get(),pinnedClassMaster.contains(cm));
-                if(pinnedClassMaster.contains(cm)){
-                    responseForpinned.add(dataInstanceMasterVO);
-                }else{
-                    responseForNonPinnned.add(dataInstanceMasterVO);
-                }
-            }else{
-                UserStore emptyUser = new UserStore();
-                emptyUser.setPhotoURL("empty");
-                emptyUser.setUserName("empty");
-                emptyUser.setLinkedPhone("empty");
-                emptyUser.setLinkedEmail("empty");
-                emptyUser.setDateViewPreference(0);
-                emptyUser.setThemeID(0);
-                emptyUser.setUserStoreID(0);
-                emptyUser.setTimeViewPreference(0);
-                dataInstanceMasterVO.setClassMaster(cm);
-                dataInstanceMasterVO.setPinnedForCurrentUser(pinnedClassMaster.contains(cm));
-                dataInstanceMasterVO.setUserStore(emptyUser);
-                dataInstanceMasterVO.setDataInstanceID(999);
-                dataInstanceMasterVO.setDataInstances("empty");
-                dataInstanceMasterVO.setInstanceTime(Long.MAX_VALUE);
-                dataInstanceMasterVO.setInstancesStatus(999);
-                dataInstanceMasterVO.setDirectoryid(999);
-                if(pinnedClassMaster.contains(cm)){
-                    emptyCMPinned.add(dataInstanceMasterVO);
-                }else{
-                    emptyDataInstance.add(dataInstanceMasterVO);
+                if (temp.isPresent()) {
+                    dataInstanceMasterVO.setDataInstanceMaster(temp.get(), pinnedClassMaster.contains(cm));
+                    if (pinnedClassMaster.contains(cm)) {
+                        responseForpinned.add(dataInstanceMasterVO);
+                    } else {
+                        responseForNonPinnned.add(dataInstanceMasterVO);
+                    }
+                } else {
+                    UserStore emptyUser = new UserStore();
+                    emptyUser.setPhotoURL("empty");
+                    emptyUser.setUserName("empty");
+                    emptyUser.setLinkedPhone("empty");
+                    emptyUser.setLinkedEmail("empty");
+                    emptyUser.setDateViewPreference(0);
+                    emptyUser.setThemeID(0);
+                    emptyUser.setUserStoreID(0);
+                    emptyUser.setTimeViewPreference(0);
+                    dataInstanceMasterVO.setClassMaster(cm);
+                    dataInstanceMasterVO.setPinnedForCurrentUser(pinnedClassMaster.contains(cm));
+                    dataInstanceMasterVO.setUserStore(emptyUser);
+                    dataInstanceMasterVO.setDataInstanceID(999);
+                    dataInstanceMasterVO.setDataInstances("empty");
+                    dataInstanceMasterVO.setInstanceTime(Long.MAX_VALUE);
+                    dataInstanceMasterVO.setInstancesStatus(999);
+                    dataInstanceMasterVO.setDirectoryid(999);
+                    if (pinnedClassMaster.contains(cm)) {
+                        emptyCMPinned.add(dataInstanceMasterVO);
+                    } else {
+                        emptyDataInstance.add(dataInstanceMasterVO);
+                    }
                 }
             }
         }
