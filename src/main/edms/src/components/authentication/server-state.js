@@ -1,7 +1,7 @@
-export let projectStoreID = 2522;
+export let projectStoreID = 2;
 
 
-export const userStoreID = 2519;
+export const userStoreID = 1;
 
 
 export const colors= ['#f44336', '#9c27b0', '#ffeb2b','#2196f3','#4caf50',

@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import { axiosGlobal as axios } from '../interaction/one_instance';
 import EditBox from "../Planner_graph/EditBox";
 import { classMaster as classMasterEmpty } from "../authentication/server-state";
-
 const CommentSectionPage = ({ itemMasterID,
     description,
     itemName,
@@ -165,9 +164,10 @@ const CommentSectionPage = ({ itemMasterID,
             <div className='header'>
                 {/* <Link className="link" to='/dashboard/home'> */}
                 {/* onClick={()=> window.location.href='#/dashboard/home'} */}
-                <BsArrowLeft className="icon" size={40} onClick={() => { 
+                <BsArrowLeft className="icon" size={40} onClick={() => {
                     window.location.href = "#/dashboard/class";
-                    handleOnclose() }} />
+                    handleOnclose()
+                }} />
                 {/* </Link> */}
                 {/* <h1>{this.props.classMaster['itemName']}</h1> */}
                 <h1 className="h1">{classMaster.itemName}</h1>

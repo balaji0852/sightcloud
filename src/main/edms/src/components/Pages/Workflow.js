@@ -25,7 +25,6 @@ class add extends Component {
 
     this.state = {
       selectedColor: props.state['setForEdit'] ? colors.at(props.state.classMaster['itemClassColorID']) : 'red',
-    
       setForEdit:props.state['setForEdit'] ,
       class:
       {
@@ -37,7 +36,11 @@ class add extends Component {
         isItemCommentable: props.state['setForEdit'] ? props.state.classMaster['isItemCommentable'] : '',
         description: props.state['setForEdit'] ? props.state.classMaster['description'] : '',
         projectStore: {
-          projectStoreID: this.props.state['projectStoreID']
+          projectStoreID: props.state['projectStoreID']
+        },
+        createdDate: 0,
+        userStore: {
+          userStoreID :  props.state['setForEdit'] ?  props.state['userStoreID']:props.state['userStoreID']
         }
       }
 
@@ -64,9 +67,10 @@ class add extends Component {
     if (this.state.class.itemName.length != 0 && this.state.class.itemName.length <= 30 && !this.callingServer) {
       var classMaster = this.state.class;
       this.callingServer = true;
-      console.log(this.callingServer)
+      console.log(this.callingServer);
+      classMaster['createdDate'] = Date.now();
       var classMasterJSON = JSON.stringify(classMaster);
-
+      
       if (this.state.setForEdit) {
         classMaster['itemMasterID'] = this.props.state['classMaster']['itemMasterID'];
         classMasterJSON = JSON.stringify(classMaster);

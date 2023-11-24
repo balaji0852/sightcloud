@@ -22,7 +22,10 @@ class EditBox extends Component {
                 },
                 "dataInstances": "",
                 "instanceTime": 0,
-                "instancesStatus": 2
+                "instancesStatus": 2,
+                "userStore":{
+                    "userStoreID": props.state['userStoreID']
+                }
             },
             hourlyDataInstanceFromChild:props.state['hourlyDataInstanceFromChild'],
             index: 0
@@ -86,6 +89,7 @@ class EditBox extends Component {
     updateCommentStatus(event) {
         let payload = this.props.state['hourlyDataInstanceFromChild'].at(this.state.index);
         payload['instancesStatus'] = event.target.value;
+        payload['instanceTime'] = payload['instancesStatus']==3?Date.now():payload['instanceTime'] ;
         const dataInstanceJSON = JSON.stringify(payload);
         axiosGlobal.put('api/dataInstanceMaster/update', dataInstanceJSON).then((response) => {
 

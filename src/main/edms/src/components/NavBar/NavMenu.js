@@ -23,7 +23,7 @@ class NavMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            valSideBar: window.screen.width < 810 ? false : true,
+            valSideBar: window.screen.width < 810 ? false : props.state.valSideBar,
             screenWidth: 0,
             currentPage: 'home'
         };
