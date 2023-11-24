@@ -20,7 +20,7 @@ public class DataInstanceMaster {
     private int dataInstanceID;
 
     //@(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "item_masterid")
     private ClassMaster classMaster;
 
