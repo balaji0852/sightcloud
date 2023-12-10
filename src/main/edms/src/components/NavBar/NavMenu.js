@@ -16,7 +16,8 @@ import comment_section_page from "../Pages/comment_section_page";
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import GraphDialog from '../Planner_graph/graphDialog';
-
+import planBIcon from '../Pages/loaders/planb-icon.JPG'; 
+import Project_management_page from '../webrender/Project_management_page.js';
 
 class NavMenu extends Component {
 
@@ -91,7 +92,8 @@ class NavMenu extends Component {
                 {/* Balaji -> changing code from v 1.0 locoflow template  */}
                 <div className='nav'>
                     {/* Date : 2/17/2022 adding the burger icon (lol) in navbar */}
-                    <AiOutlineMenu className='navBarIcon' size={30} onClick={this.manageSideBarContent.bind(this)} />
+                    {/* <AiOutlineMenu className='navBarIcon' size={30} onClick={this.manageSideBarContent.bind(this)} /> */}
+                    <img className="appLogo" src={planBIcon} onClick={this.manageSideBarContent.bind(this)}/>
                     <h2>planB</h2>
                     <div className="navRight">
                         <FaUserCircle className='icon' size={30} />
@@ -137,16 +139,22 @@ class NavMenu extends Component {
                                 {this.state.valSideBar && "Projects"}
                             </div>
                         </Link>
+                        <Link className='link hoverEffects' to="/pm" >
+                            <div className={this.state.updatePath ? 'sideBarIconsPadding' : 'sideBarIconsPadding'}>
+                                <AiFillReconciliation className='navBarIcon' size={25} />
+                                {this.state.valSideBar && "Project management"}
+                            </div>
+                        </Link>
                     </div>
                     <div className={this.state.valSideBar ? 'body_left_margin_max body' : 'body_left_margin_min body2'}>
-                        <Breadcrumb updatePathThroughProp={this.updatePath}  />
+                        {/* <Breadcrumb updatePathThroughProp={this.updatePath}  /> */}
                         {/* {this.props.children} */}
                         <Switch>
                             <Route path="/dashboard/home" component={Home} />
                             <Route path="/dashboard/setting" component={Setting} />
                             <Route path="/dashboard/add" component={add} />
                             <Route path="/dashboard/class" component={classHome} />
-                        </Switch>
+                            </Switch>
                     </div>
                 </div>
             </div>

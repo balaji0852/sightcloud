@@ -13,6 +13,7 @@ var _state = {
         isItemCommentable: 0,
         description: "empty",
         createdDate: 0,
+        carryForwardMyWork :false,
         userStore: {
             userStoreID: 0
         },
@@ -57,6 +58,7 @@ export function appReducer(state = _state, action) {
                     itemClassColorID: action.payload['classMaster']['itemClassColorID'],
                     itemPriority: action.payload['classMaster']['itemPriority'],
                     isItemCommentable: action.payload['classMaster']['isItemCommentable'],
+                    carryForwardMyWork: action.payload['classMaster']['carryForwardMyWork'],
                     description: action.payload['classMaster']['description'],
                     createdDate: action.payload['classMaster']['createdDate'],
                     userStore: action.payload['classMaster']['userStore'],
@@ -88,6 +90,7 @@ export function appReducer(state = _state, action) {
                     itemClassColorID: action.payload['classMaster']['itemClassColorID'],
                     itemPriority: action.payload['classMaster']['itemPriority'],
                     isItemCommentable: action.payload['classMaster']['isItemCommentable'],
+                    carryForwardMyWork: action.payload['classMaster']['carryForwardMyWork'],
                     description: action.payload['classMaster']['description'],
                     createdDate: action.payload['classMaster']['createdDate'],
                     userStore: action.payload['classMaster']['userStore'],

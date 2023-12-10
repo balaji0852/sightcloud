@@ -4,7 +4,7 @@ import { axiosGlobal } from "../interaction/one_instance";
 import "./Project_management_page.css";
 import ManageUser from "./Project_management_widget/manage_user";
 import ToggleSwitch from "./widgets/ToggleSwitch.js";
-
+import { connect } from "react-redux";
 class ProjectManagementPage extends Component {
 
 
@@ -35,9 +35,9 @@ class ProjectManagementPage extends Component {
             },
 
             
-            themeid: params.get('themeid') ? params.get('themeid') : undefined,
-            projectStoreID: params.get('projectStoreID') ? params.get('projectStoreID') : undefined,
-            userStoreID: params.get('userStoreID') ? params.get('userStoreID') : undefined
+            themeid: params.get('themeid') ? params.get('themeid') : 1,
+            projectStoreID: params.get('projectStoreID') ? params.get('projectStoreID') : this.props.state["projectStoreID"],
+            userStoreID: params.get('userStoreID') ? params.get('userStoreID') : this.props.state["userStoreID"]
         }
 
 
@@ -124,4 +124,12 @@ class ProjectManagementPage extends Component {
 }
 
 
-export default ProjectManagementPage;
+const mapStateToProps = (state) => {
+
+    return ({
+        state: state
+    });
+};
+
+
+export default connect(mapStateToProps)(ProjectManagementPage);

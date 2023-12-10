@@ -7,7 +7,7 @@ import { colors } from "../authentication/server-state";
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import {classMaster} from "../authentication/server-state";
-
+import ToggleSwitch from "../webrender/widgets/ToggleSwitch.js";
 //bal.js, text-align : justify <- aligns text to normal
 class EditBox extends Component {
     constructor(props) {
@@ -49,7 +49,7 @@ class EditBox extends Component {
         stateLocal.openDialog = false;
         stateLocal.hourlyDataInstanceFromChild = []
         stateLocal.type = 0;
-        stateLocal.pgReRender = 0;
+        stateLocal.pgReRender = Math.random();
         //11/11/2022, balaji-prob, if we chnage classMaster. csp re render-prop change
         // stateLocal.classMaster = classMaster
         this.stateCleanUpGraphDialog(stateLocal);

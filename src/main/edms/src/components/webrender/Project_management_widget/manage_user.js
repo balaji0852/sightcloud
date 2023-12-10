@@ -32,6 +32,7 @@ class ManageUser extends Component {
     }
 
     //7/3/2023:balaji: currently used by delete 
+    
     updateProjectMembers(userManagementStore, state) {
         if (userManagementStore.state != state) {
             userManagementStore.state = state;
@@ -107,11 +108,11 @@ class ManageUser extends Component {
                                 this.state.actionBarOpenFor === data.userStore.userStoreID &&
                                 <div className="actionArea">
                                     <div className="actionButton">{ !data.admin &&
-                                        <Link onClick={() => { 
+                                        <div onClick={() => { 
                                             this.setState({ actionBarOpenFor:0});
                                             this.updateProjectMembers(data, 4) }}>
                                             delete
-                                        </Link>
+                                        </div>
     }
                                     </div>
                                 </div>

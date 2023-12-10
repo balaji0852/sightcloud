@@ -20,7 +20,7 @@ class GraphDialog extends Component {
         // stateLocal.classMaster = classMasterEmpty;
         stateLocal.hourlyDataInstanceFromChild = [];
         stateLocal.openDialog = false;
-        stateLocal.pgReRender = 0;
+        stateLocal.pgReRender = Math.random();
         stateLocal.type = 0;
         this.props.dispatch({
             type: 'changeGraphDialog',

@@ -2,7 +2,7 @@ import { React, Component } from 'react';
 import { Button, FormGroup, Label, Input, Col, Form, Row } from 'reactstrap';
 import './Workflow.css';
 import ColorStore from '../Planner_graph/colorStore';
-import { projectStoreID ,classMaster as classMasterEmpty} from '../../components/authentication/server-state'
+import { projectStoreID, classMaster as classMasterEmpty } from '../../components/authentication/server-state'
 import { axiosGlobal } from '../interaction/one_instance';
 import axios from 'axios';
 import { data } from 'jquery';
@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import ReduxWrapper from '../authentication/ReduxWrapper';
 import { colors } from "../authentication/server-state";
-
+import ToggleSwitch from '../webrender/widgets/ToggleSwitch';
 class add extends Component {
 
 
@@ -25,7 +25,7 @@ class add extends Component {
 
     this.state = {
       selectedColor: props.state['setForEdit'] ? colors.at(props.state.classMaster['itemClassColorID']) : 'red',
-      setForEdit:props.state['setForEdit'] ,
+      setForEdit: props.state['setForEdit'],
       class:
       {
         itemName: props.state['setForEdit'] ? props.state.classMaster['itemName'] : '',
@@ -35,12 +35,13 @@ class add extends Component {
         itemPriority: props.state['setForEdit'] ? props.state.classMaster['itemPriority'] : '',
         isItemCommentable: props.state['setForEdit'] ? props.state.classMaster['isItemCommentable'] : '',
         description: props.state['setForEdit'] ? props.state.classMaster['description'] : '',
+        carryForwardMyWork:props.state['setForEdit'] ? props.state.classMaster['carryForwardMyWork'] : '',
         projectStore: {
           projectStoreID: props.state['projectStoreID']
         },
         createdDate: 0,
         userStore: {
-          userStoreID :  props.state['setForEdit'] ?  props.state['userStoreID']:props.state['userStoreID']
+          userStoreID: props.state['setForEdit'] ? props.state['userStoreID'] : props.state['userStoreID']
         }
       }
 
@@ -70,7 +71,7 @@ class add extends Component {
       console.log(this.callingServer);
       classMaster['createdDate'] = Date.now();
       var classMasterJSON = JSON.stringify(classMaster);
-      
+
       if (this.state.setForEdit) {
         classMaster['itemMasterID'] = this.props.state['classMaster']['itemMasterID'];
         classMasterJSON = JSON.stringify(classMaster);
@@ -82,7 +83,7 @@ class add extends Component {
             this.setState({
               class: classMaster,
               selectedColor: 'red',
-              setForEdit:false
+              setForEdit: false
             });
             this.callingServer = false;
             window.location.href = '#/dashboard/class';
@@ -116,8 +117,9 @@ class add extends Component {
 
 
   onInputchange(event) {
+    console.log("cfmw")
     var classMaster = this.state.class;
-    classMaster[event.target.name] = event.target.value;
+    classMaster[event.target.name] = event.target.id=="carryForwardMyWork"?!classMaster["carryForwardMyWork"]:event.target.value;
     this.setState({
       class: classMaster
     });
@@ -150,15 +152,24 @@ class add extends Component {
           <label>Select color</label>
           <ColorStore onSelected={this.onColorChange} selectedColor={this.state.selectedColor} />
         </FormGroup>
+        <br/>
         <FormGroup row>
+            <Col lg={1} sm={1} xs={1}>
+            <ToggleSwitch id="carryForwardMyWork"  
+            checked={this.state.class['carryForwardMyWork']} 
+            onChange={this.onInputchange}/>
+          </Col>
+          <Label for="exampleSelect" lg={10} sm={6} xs={5} >  Turning on CFMW (carry forward my work) will carry forward all the unfinished tasks to next day.</Label>
+        </FormGroup>
+        {/* <FormGroup row>
           <Label for="exampleSelect" lg={1} sm={1} xs={1} >Category</Label>
           <Col lg={5} sm={5} xs={8}>
             <Input type="select" name="select" id="exampleSelect">
-              {/* <option>1</option>
+              <option>1</option>
           <option>2</option>
           <option>3</option>
           <option>4</option>
-          <option>5</option> */}
+          <option>5</option>
             </Input>
           </Col>
         </FormGroup>
@@ -166,21 +177,21 @@ class add extends Component {
           <Label for="exampleSelect" lg={1} sm={1} xs={1}>Sub-Category</Label>
           <Col lg={5} sm={5} xs={8}>
             <Input type="select" name="select" id="exampleSelect" >
-              {/* <option>1</option>
+              <option>1</option>
             <option>2</option>
             <option>3</option>
             <option>4</option>
-            <option>5</option> */}
+            <option>5</option>
             </Input>
           </Col>
-        </FormGroup>
+        </FormGroup> */}
+        <br/>
         <FormGroup>
-          <Label for="exampleText">Description</Label>
           <Input placeholder='Class Description' type="textarea" name="description" id="exampleText"
             onChange={this.onInputchange} value={this.state.class.description} rows="6" />
         </FormGroup>
         <FormGroup>
-          <Button color="primary" onClick={this.updateDataToDatabase.bind(this)}>{this.state.setForEdit ?'update':'Add class' }</Button>
+          <Button color="primary" onClick={this.updateDataToDatabase.bind(this)}>{this.state.setForEdit ? 'update' : 'Add class'}</Button>
         </FormGroup>
       </div >;
     </ReduxWrapper>;

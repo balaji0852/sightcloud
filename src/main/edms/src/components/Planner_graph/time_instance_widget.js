@@ -37,6 +37,7 @@ class timeInstanceWidget extends Component {
 
 
 
+    
 
 
     getTodayInstance() {
@@ -94,7 +95,7 @@ class timeInstanceWidget extends Component {
         }
         todayInstance.map((dataInstance) => {
             let date = new Date(dataInstance['instanceTime']);
-            data.at(date.getHours() == 0 ? 0 : date.getHours() - 1).push(dataInstance);
+            data.at(date.getHours()).push(dataInstance);
         });
         this.setState({
             dataInstance: data
@@ -105,9 +106,9 @@ class timeInstanceWidget extends Component {
         const { dateTimeEpoch } = this.props;
         const { instanceStatus } = this.props;
         const { viewType } = this.props;
-
+        console.log("state change");
         if (nextProps.dateTimeEpoch != dateTimeEpoch || nextProps.instanceStatus != instanceStatus
-            || nextProps.test != this.props.test) {
+            || nextProps.test != this.props.test  ) {
             //   || nextProps.test != this.props.test
             //balaji : 10/9/22 adding test for rerendering the tiw.js
             //balaji : sig-43 , on async response showing the old states data, previous date data, 
