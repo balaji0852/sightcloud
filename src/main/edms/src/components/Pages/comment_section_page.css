@@ -33,7 +33,9 @@
 .descriptionCSP{
     display: flex;
     width: 95%;
-    height: 100px;
+    height: 80px;
+    overflow-y: scroll;
+    /* height: fit-content; */
 }
 
 @media (max-width: 550px){

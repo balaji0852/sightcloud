@@ -109,3 +109,19 @@
     background-color: rebeccapurple;
     position:absolute;
 }
+.lastCommentCasing{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    bottom: 19px;
+}
+
+.dataInstancesUserIcon{
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: white;
+    border-width: 2px;
+}

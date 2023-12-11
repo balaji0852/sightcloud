@@ -25,6 +25,7 @@
   padding: 10px;
   display: flexBox;
   position: fixed;
+  z-index: 1;
   top: 0;
   /* 16 aug 2022: bs/ we are getting left margin in the nav, added left-0 */
   left: 0;

@@ -1,9 +1,9 @@
 .timeInstanceWidget {
-    height: 4800px;
+    height: fit-content;
     margin: 1px;
     overflow-y: hidden;
     overflow-x: hidden;
-    background-color:whitesmoke;
+    background-color:black;
 }
 
 
@@ -14,14 +14,33 @@
     /* sig 38, css sizing issue, with the height made it 200px, mbc-e sizing will be
     fit in mediaquery; margin with 1px is moving each dataInstances, and disaligning
     the dataInstances  */
-    height: 200px;
+    display: flex;
+    height: 100px;
     width: 100%;
     /* margin  : 1px; */
-    display: flex;
+   
+    
 }
 
+
+
+.dataInstancesUserIcon{
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: white;
+    border-width: 2px;
+}
+
+
+
 .items {
-    height: 200px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; 
+    justify-content: space-between;
+    height: 100px;
     width: 100%;
     background-color: yellow;
     font-size: 13px;

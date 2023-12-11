@@ -97,6 +97,7 @@ const ClassItemComponent = ({doQuery, dispatch, classMaster, title, description,
                         </Menu>
                 </div>
                 <div className='description limitingText'>{description}</div>
+
                 <Link to={classRoute} onClick={() => {
                     let stateLocal = state;
                     stateLocal.classMaster = classMaster;
@@ -106,6 +107,10 @@ const ClassItemComponent = ({doQuery, dispatch, classMaster, title, description,
                 }}>
                     <div className='lastComment limitingText' >{lastComment}</div>
                 </Link>
+                <div className='lastCommentCasing'>
+                <img className="dataInstancesUserIcon" src={classMaster.userStore.photoURL}/>
+                </div>
+
             </div>
         </ErrorBoundary>);
     // }

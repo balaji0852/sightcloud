@@ -37,7 +37,7 @@ class timeInstanceWidget extends Component {
 
 
 
-    
+
 
 
     getTodayInstance() {
@@ -108,7 +108,7 @@ class timeInstanceWidget extends Component {
         const { viewType } = this.props;
         console.log("state change");
         if (nextProps.dateTimeEpoch != dateTimeEpoch || nextProps.instanceStatus != instanceStatus
-            || nextProps.test != this.props.test  ) {
+            || nextProps.test != this.props.test) {
             //   || nextProps.test != this.props.test
             //balaji : 10/9/22 adding test for rerendering the tiw.js
             //balaji : sig-43 , on async response showing the old states data, previous date data, 
@@ -119,7 +119,7 @@ class timeInstanceWidget extends Component {
                 this.setState({
                     dataInstance: []
                 });
-             }
+            }
 
             this.getTodayInstance();
         }
@@ -136,7 +136,7 @@ class timeInstanceWidget extends Component {
                         "timeInstanceWidget vp5"}>{
                     this.state.dataInstance.map((hourslyItems, index) => {
                         //todo :: balaji: added key for hourly items , need check using random key is a good practice.
-                        return <div key={Math.random()}
+                        return <div key={index}
                             //balaji : sig-55, fitting the redux for gd
                             onClick={() => {
 
@@ -154,7 +154,8 @@ class timeInstanceWidget extends Component {
                             }}
                             className="dataInstances" >{hourslyItems.map((items) => {
                                 return <div className="items" key={items['dataInstanceID']} style={{ backgroundColor: colors.at(items['classMaster']['itemClassColorID']) }} >
-                                    {items['dataInstanceID'] + items['dataInstances']}
+                                    <div className="dataInstancesText">{items['dataInstanceID'] + items['dataInstances']}</div>
+                                    <img className="dataInstancesUserIcon" src={items['userStore']['photoURL']} />
                                 </div>
                             })}</div>
                     })

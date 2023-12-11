@@ -26,7 +26,7 @@ const CommentSectionPage = ({ itemMasterID,
     });
     const [editBoxState, SetEditBoxState] = useState(false);
     const [pgReRender, setPGReRender] = useState(1);
-
+    const [showdescription, setDescription] = useState(false);
     //balaji:fix for handling empty props
     useEffect(() => {
         if (itemMasterID === 'empty' || itemMasterID === 0) {

@@ -93,6 +93,7 @@
 
 .main-datainstances{
     width: 70%;
+
 }
 
 
@@ -100,6 +101,7 @@
     margin-top: 35px;
     margin-left: 30px;
     width: 30%;
+    height: fit-content;
 }
 
 

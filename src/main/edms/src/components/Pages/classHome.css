@@ -4,7 +4,7 @@
     flex-wrap: wrap;
     gap: 0.7rem;
     text-align: start;
-
+    background-color: black;
     /* Balaji:28/2/2023 - bug 24  */
     padding-top: 100px;
   }
