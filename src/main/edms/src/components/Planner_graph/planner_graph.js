@@ -24,7 +24,7 @@ class plannerGraph extends Component {
 
         let day = Date.now();
         this.day5 = day - 4 * 86400000;
-        this.day4 = day - 3 * 86400000; 
+        this.day4 = day - 3 * 86400000;
         this.day3 = day - 2 * 86400000;
         this.day2 = day - 86400000;
         this.day1 = day;
@@ -32,10 +32,16 @@ class plannerGraph extends Component {
 
         this.state = {
             viewPreference: props.state['viewPreference'],
-            dates:  props.state['viewPreference']===1?[ this.day1]:props.state['viewPreference']===2?[ this.day2,this.day1]:props.state['viewPreference']===3?[ this.day3,this.day2,this.day1]:[ this.day5,this.day4,this.day3,this.day2,this.day1],
+            dates: props.state['viewPreference'] === 1 ? [this.day1] : props.state['viewPreference'] === 2 ? [this.day2, this.day1] : props.state['viewPreference'] === 3 ? [this.day3, this.day2, this.day1] : [this.day5, this.day4, this.day3, this.day2, this.day1],
             projectStoreID: props.state['projectStoreID'],
             instanceStatus: 0,
-            openDialog:false
+            openDialog: false ,
+            themeID: this.props.state['userStore']['themeID'],
+            themeCSS: {
+                color: this.props.state['userStore']['themeID'] == 1 ? "White" : "Black",
+                backgroundColor: this.props.state['userStore']['themeID'] == 1 ? "Black" : "White",
+                Height: "100vh"
+            }
         }
 
 
@@ -50,9 +56,10 @@ class plannerGraph extends Component {
         });
         let stateLocal = this.props.state;
         stateLocal.viewPreference = viewPreferenceValue;
-        this.props.dispatch({ 
-            type: 'changeGraphDialog', 
-            payload: stateLocal});
+        this.props.dispatch({
+            type: 'changeGraphDialog',
+            payload: stateLocal
+        });
     }
 
     componentDidUpdate() {
@@ -61,13 +68,13 @@ class plannerGraph extends Component {
 
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         //1/11/2022: balaji: calling this.stateCleanUpGraphDialog();.
         //                    for pg gd cleanup
         // this.stateCleanUpGraphDialog();
         window.scrollTo({
-            top:0,
-             behavior: 'smooth',
+            top: 0,
+            behavior: 'smooth',
         });
     }
     componentDidMount() {
@@ -79,7 +86,7 @@ class plannerGraph extends Component {
         // console.log("componentDidMount " + this.state);
         console.log(document.documentElement.scrollHeight)
         window.scrollTo({
-            top:(new Date().getHours()/24)*4500,
+            top: (new Date().getHours() / 24) * 4500,
             //  behavior: 'smooth',
         });
     }
@@ -156,7 +163,7 @@ class plannerGraph extends Component {
 
     }
 
-    
+
 
     setInstanceStatus(event) {
         let _instanceStatus = event.target.value;
@@ -170,10 +177,10 @@ class plannerGraph extends Component {
         console.log(this.props.state);
 
         return <div>
-            <div className={this.props.graphType == 2 ? "mainToolbar" : "mainToolbarextended"}>
+            <div className={this.props.graphType == 2 ? "mainToolbar" : "mainToolbarextended"} style={this.state.themeCSS}>
                 <div className="toolBar" >
                     <div className="filter">
-                        <div>{}</div>
+                        <div>{ }</div>
                         <div className="dateViewLabel">filter</div>
                         <Input type="select" name="select" id="exampleSelect" onChange={
                             this.setInstanceStatus.bind(this)} >
@@ -209,7 +216,7 @@ class plannerGraph extends Component {
                     }
                 </div>
             </div>
-            <div className="planner-graph">
+            <div className="planner-graph" style={this.state.themeCSS}>
                 <div className="time_column">
                     {this.hours.map((time, index) => {
                         return <div key={index * 2} className="time">{
@@ -239,7 +246,7 @@ class plannerGraph extends Component {
                                 itemMasterID={this.props.itemMasterID}
                                 projectStoreID={this.state.projectStoreID}
                                 instanceStatus={this.state.instanceStatus}
-                                viewType={this.state.viewPreference} 
+                                viewType={this.state.viewPreference}
                                 test={this.props.test} />
                             <TimeInstanceWidget
                                 id={3}
@@ -249,17 +256,17 @@ class plannerGraph extends Component {
                                 itemMasterID={this.props.itemMasterID}
                                 projectStoreID={this.state.projectStoreID}
                                 instanceStatus={this.state.instanceStatus}
-                                viewType={this.state.viewPreference} 
+                                viewType={this.state.viewPreference}
                                 test={this.props.test} />
                             <TimeInstanceWidget
-                               id={4}
+                                id={4}
                                 graphType={this.props.graphType}
                                 dateTimeEpoch={this.state.dates.at(3)}
                                 zeroDateTimeEpoch={this.state.dates.at(4)}
                                 itemMasterID={this.props.itemMasterID}
                                 projectStoreID={this.state.projectStoreID}
                                 instanceStatus={this.state.instanceStatus}
-                                viewType={this.state.viewPreference} 
+                                viewType={this.state.viewPreference}
                                 test={this.props.test} />
                             <TimeInstanceWidget
                                 id={5}
@@ -269,7 +276,7 @@ class plannerGraph extends Component {
                                 itemMasterID={this.props.itemMasterID}
                                 projectStoreID={this.state.projectStoreID}
                                 instanceStatus={this.state.instanceStatus}
-                                viewType={this.state.viewPreference} 
+                                viewType={this.state.viewPreference}
                                 test={this.props.test} />
                         </> : this.state.viewPreference == 3 ?
                             <>
@@ -284,7 +291,7 @@ class plannerGraph extends Component {
                                     itemMasterID={this.props.itemMasterID}
                                     projectStoreID={this.state.projectStoreID}
                                     instanceStatus={this.state.instanceStatus}
-                                    viewType={this.state.viewPreference} 
+                                    viewType={this.state.viewPreference}
                                     test={this.props.test} />
                                 <TimeInstanceWidget
                                     id={7}
@@ -294,7 +301,7 @@ class plannerGraph extends Component {
                                     itemMasterID={this.props.itemMasterID}
                                     projectStoreID={this.state.projectStoreID}
                                     instanceStatus={this.state.instanceStatus}
-                                    viewType={this.state.viewPreference} 
+                                    viewType={this.state.viewPreference}
                                     test={this.props.test} />
                                 <TimeInstanceWidget
                                     id={8}
@@ -304,7 +311,7 @@ class plannerGraph extends Component {
                                     itemMasterID={this.props.itemMasterID}
                                     projectStoreID={this.state.projectStoreID}
                                     instanceStatus={this.state.instanceStatus}
-                                    viewType={this.state.viewPreference} 
+                                    viewType={this.state.viewPreference}
                                     test={this.props.test} />
                             </> : this.state.viewPreference == 2 ?
                                 <>
@@ -318,7 +325,7 @@ class plannerGraph extends Component {
                                         itemMasterID={this.props.itemMasterID}
                                         projectStoreID={this.state.projectStoreID}
                                         instanceStatus={this.state.instanceStatus}
-                                        viewType={this.state.viewPreference} 
+                                        viewType={this.state.viewPreference}
                                         test={this.props.test} />
                                     <TimeInstanceWidget
                                         id={10}
@@ -328,19 +335,19 @@ class plannerGraph extends Component {
                                         itemMasterID={this.props.itemMasterID}
                                         projectStoreID={this.state.projectStoreID}
                                         instanceStatus={this.state.instanceStatus}
-                                        viewType={this.state.viewPreference} 
+                                        viewType={this.state.viewPreference}
                                         test={this.props.test} />
                                 </> :
                                 <>
                                     <TimeInstanceWidget
-                                       id={11}
+                                        id={11}
                                         graphType={this.props.graphType}
                                         dateTimeEpoch={this.state.dates.at(0)}
                                         zeroDateTimeEpoch={this.state.dates.at(0) + 86400000}
                                         itemMasterID={this.props.itemMasterID}
                                         projectStoreID={this.state.projectStoreID}
                                         instanceStatus={this.state.instanceStatus}
-                                        viewType={this.state.viewPreference} 
+                                        viewType={this.state.viewPreference}
                                         test={this.props.test} />
                                 </>
                 }
@@ -359,15 +366,15 @@ class plannerGraph extends Component {
 }
 
 
-plannerGraph.propTypes ={
-    state:PropTypes.object.isRequired
+plannerGraph.propTypes = {
+    state: PropTypes.object.isRequired
 }
-  
-  const mapStateToProps = (state) => {
+
+const mapStateToProps = (state) => {
     return ({
-        state:state
+        state: state
     });
-  };
-  
-  
-  export default connect(mapStateToProps)(plannerGraph);
+};
+
+
+export default connect(mapStateToProps)(plannerGraph);

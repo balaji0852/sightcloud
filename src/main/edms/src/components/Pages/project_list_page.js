@@ -8,8 +8,8 @@ import loadingDescription from './save-organisation.jpg';
 import CommonDescriptor from './loaders/common_descriptor';
 import failureLoadingDescription from '../image-store/team-project-work.jpg';
 import { Button } from 'reactstrap';
-import { connect } from 'react-redux';
-
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
 
 class ProjectList extends Component {
     constructor(props) {
@@ -19,7 +19,13 @@ class ProjectList extends Component {
             loaded: false,
             projectItems: [],
             status: 'contains',
-            statusMessage: "We are fetching you're mission critical business-projects..."
+            statusMessage: "We are fetching you're mission critical business-projects...",
+            themeID: this.props.state['userStore']['themeID'],
+            themeCSS: {
+                color: this.props.state['userStore']['themeID'] == 1 ? "White" : "Black",
+                backgroundColor: this.props.state['userStore']['themeID'] == 1 ? "Black" : "White",
+                Height: "100vh"
+            }
         }
     }
 
@@ -60,7 +66,7 @@ class ProjectList extends Component {
     }
 
     render() {
-        return <div className="project_list_page">
+        return <div className="project_list_page" style={this.state.themeCSS}>
             <div className='header'>
                 <BsArrowLeft size={40} onClick={() =>{
                     window.location.href =this.state.projectItems.length===0?'#/project': '#/dashboard/home'
@@ -109,8 +115,16 @@ class ProjectList extends Component {
     }
 }
 
-ProjectList.propTypes = {}
+ProjectList.propTypes = {
+    state: PropTypes.object.isRequired
+}
 
-export default connect()(ProjectList)
+const mapStateToProps = (state) => {
+    return ({
+        state: state
+    });
+};
+
+export default connect(mapStateToProps)(ProjectList)
 
 

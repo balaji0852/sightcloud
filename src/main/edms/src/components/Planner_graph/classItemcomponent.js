@@ -18,7 +18,7 @@ import { axiosGlobal} from '../interaction/one_instance';
 
 
 const ClassItemComponent = ({doQuery, dispatch, classMaster, title, description, itemClassColorID, itemMasterID
-    , state,lastComment }) => {
+    , state,lastComment,lastCommentedUser }) => {
 
     const [comment, setComments] = useState('loading');
     const [classRoute, setClassRoute] = useState('/class');
@@ -108,7 +108,7 @@ const ClassItemComponent = ({doQuery, dispatch, classMaster, title, description,
                     <div className='lastComment limitingText' >{lastComment}</div>
                 </Link>
                 <div className='lastCommentCasing'>
-                <img className="dataInstancesUserIcon" src={classMaster.userStore.photoURL}/>
+                {lastCommentedUser.photoURL!="empty" &&  <img className="dataInstancesUserIcon" src={lastCommentedUser.photoURL}/>}
                 </div>
 
             </div>
@@ -125,7 +125,8 @@ ClassItemComponent.propTypes = {
     itemClassColorID: PropTypes.any.isRequired,
     state: PropTypes.any.isRequired,
     doQuery:PropTypes.any.isRequired,
-    lastComment:PropTypes.any.isRequired
+    lastComment:PropTypes.any.isRequired,
+    lastCommentedUser:PropTypes.any.isRequired
 }
 
 

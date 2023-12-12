@@ -1,5 +1,5 @@
 .PMPage{
-    height: 100%;
+    height: max-content;
     overflow-y: auto;
     overflow-x: hidden;    
     font-family:Verdana, Geneva, Tahoma, sans-serif;

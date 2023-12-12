@@ -13,7 +13,7 @@ var _state = {
         isItemCommentable: 0,
         description: "empty",
         createdDate: 0,
-        carryForwardMyWork :false,
+        carryForwardMyWork: false,
         userStore: {
             userStoreID: 0
         },
@@ -37,7 +37,17 @@ var _state = {
     //11/11/2022- balaji, adding view preference, 
     viewPreference: 2,
     //25/11/2023 - Balaji, Adding userStoreID 
-    userStoreID: userStoreID
+    userStoreID: userStoreID,
+    userStore: {
+        userStoreID: 0,
+        dateViewPreference: 0,
+        timeViewPreference: 0,
+        linkedEmail: "empty",
+        linkedPhone: "empty",
+        themeID: 0,
+        userName: "empty",
+        photoURL: "empty"
+    }
 }
 
 export function appReducer(state = _state, action) {
@@ -72,8 +82,16 @@ export function appReducer(state = _state, action) {
                 pgReRender: action.payload['pgReRender'],
                 type: action.payload['type'],
                 viewPreference: action.payload['viewPreference'],
-                userStoreID: action.payload['userStoreID']
+                userStoreID: action.payload['userStoreID'],
+                userStore:action.payload['userStore']
             }
+
+        case 'updateUser':
+            stateDup['viewPreference'] = action.payload['userStore']['dateViewPreference'];
+            stateDup['userStoreID'] = action.payload['userStore']['userStoreID'];
+            stateDup['userStore'] = action.payload['userStore'];
+            return stateDup
+
         case 'changeProject':
             stateDup['projectStoreID'] = action.payload['projectStoreID'];
             return stateDup
@@ -103,7 +121,8 @@ export function appReducer(state = _state, action) {
                 pgReRender: action.payload['pgReRender'],
                 type: action.payload['type'],
                 viewPreference: action.payload['viewPreference'],
-                userStoreID: action.payload['userStoreID']
+                userStoreID: action.payload['userStoreID'],
+                userStore:action.payload['userStore']
             }
         default:
             return state

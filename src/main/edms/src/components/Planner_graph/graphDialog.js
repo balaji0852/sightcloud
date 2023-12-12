@@ -12,6 +12,16 @@ class GraphDialog extends Component {
         super(props);
 
         this.clickedInsideENV = false;
+
+        this.state = {
+            
+            themeID: this.props.state['userStore']['themeID'],
+            themeCSS: {
+                color: this.props.state['userStore']['themeID'] == 1 ? "White" : "Black",
+                backgroundColor: this.props.state['userStore']['themeID'] == 1 ? "Black" : "White",
+                Height: "100vh"
+            }
+        }
     }
 
     closeDialog() {
@@ -32,7 +42,7 @@ class GraphDialog extends Component {
         console.log('cwu');
     }
     render() {
-        return <div className="dialog">{this.props.state['openDialog'] &&
+        return <div className="dialog" style={this.state.themeCSS}>{this.props.state['openDialog'] &&
             <div className={"grapDialog-background"} onClick={() => {
                 if (!this.clickedInsideENV) {
                     this.closeDialog();

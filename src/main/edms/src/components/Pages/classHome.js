@@ -97,6 +97,7 @@ class classHome extends Component {
               itemClassColorID={value['classMaster']['itemClassColorID']}
               classMaster={value['classMaster']} 
               lastComment={value['dataInstances']}
+              lastCommentedUser={value['userStore']}
               doQuery={(itemMasterID)=>this.doQueryToServer()}/>
           </ErrorBoundary>
         })

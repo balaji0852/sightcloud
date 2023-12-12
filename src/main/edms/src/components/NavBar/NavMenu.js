@@ -26,7 +26,13 @@ class NavMenu extends Component {
         this.state = {
             valSideBar: window.screen.width < 810 ? false : props.state.valSideBar,
             screenWidth: 0,
-            currentPage: 'home'
+            currentPage: 'home',
+            themeID : this.props.state['userStore']['themeID'],
+            themeCSS : {
+                color:this.props.state['userStore']['themeID']==1 ?"White":"Black",
+                backgroundColor:this.props.state['userStore']['themeID']==1 ?"Black":"White",
+                Height:"100vh"
+            }
         };
 
         window.addEventListener('resize', (t) => {
@@ -88,15 +94,16 @@ class NavMenu extends Component {
 
         return (
             // <Router>
-            <div className='main'>
+            <div className='main' style={this.state.themeCSS}>
                 {/* Balaji -> changing code from v 1.0 locoflow template  */}
-                <div className='nav'>
+                <div className='nav' style={this.state.themeCSS} >
                     {/* Date : 2/17/2022 adding the burger icon (lol) in navbar */}
                     {/* <AiOutlineMenu className='navBarIcon' size={30} onClick={this.manageSideBarContent.bind(this)} /> */}
                     <img className="appLogo" src={planBIcon} onClick={this.manageSideBarContent.bind(this)}/>
                     <h2>planB</h2>
                     <div className="navRight">
-                        <FaUserCircle className='icon' size={30} />
+                        {this.props.state.userStore.photoURL!="empty" && <img className="dataInstancesUserIcon" src={this.props.state.userStore.photoURL}/>}
+                    {this.props.state.userStore.photoURL=="empty" &&  <FaUserCircle className='icon' size={30} />}
                     </div>
                 </div>
                 {/* ............................................................ */}
@@ -106,47 +113,47 @@ class NavMenu extends Component {
                 {/* Balaji : Here comes the mainlayout of app body */}
                 {/* Balaji : has the app segment sidebar and main body */}
                 {/* *************************************************************** */}
-                <div className='appBody'>
+                <div className='appBody' style={this.state.themeCSS} >
                     <div className={this.state.valSideBar
-                        ? 'sideBarOpen' : 'sideBar'}>
+                        ? 'sideBarOpen' : 'sideBar'} style={this.state.themeCSS}>
                         <Link className='link hoverEffects' to="/dashboard/home" >
-                            <div className='sideBarIconsPadding'>
+                            <div className='sideBarIconsPadding' style={this.state.themeCSS}>
                                 <AiOutlineHome className='navBarIcon' size={25} />
                                 {this.state.valSideBar && "Home"}
                             </div>
                         </Link>
                         <Link className='link hoverEffects' to="/dashboard/class" >
-                            <div className='sideBarIconsPadding'>
+                            <div className='sideBarIconsPadding' style={this.state.themeCSS}>
                                 <AiOutlineDeliveredProcedure className='navBarIcon' size={25} />
                                 {this.state.valSideBar && "Classes"}
                             </div>
                         </Link>
                         <Link className='link hoverEffects' to="/dashboard/add" >
-                            <div className='sideBarIconsPadding'>
+                            <div className='sideBarIconsPadding' style={this.state.themeCSS}>
                                 <AiOutlineCloudSync className='navBarIcon' size={25} />
                                 {this.state.valSideBar && "Add"}
                             </div>
                         </Link>
                         <Link className='link hoverEffects' to="/dashboard/setting" >
-                            <div className={this.state.updatePath ? 'sideBarIconsPadding' : 'sideBarIconsPadding'}>
+                            <div className={this.state.updatePath ? 'sideBarIconsPadding' : 'sideBarIconsPadding'} style={this.state.themeCSS}>
                                 <AiOutlineDeploymentUnit className='navBarIcon' size={25} />
                                 {this.state.valSideBar && "Setting"}
                             </div>
                         </Link>
                         <Link className='link hoverEffects' to="/projects" >
-                            <div className={this.state.updatePath ? 'sideBarIconsPadding' : 'sideBarIconsPadding'}>
+                            <div className={this.state.updatePath ? 'sideBarIconsPadding' : 'sideBarIconsPadding'} style={this.state.themeCSS}>
                                 <AiFillReconciliation className='navBarIcon' size={25} />
                                 {this.state.valSideBar && "Projects"}
                             </div>
                         </Link>
                         <Link className='link hoverEffects' to="/pm" >
-                            <div className={this.state.updatePath ? 'sideBarIconsPadding' : 'sideBarIconsPadding'}>
+                            <div className={this.state.updatePath ? 'sideBarIconsPadding' : 'sideBarIconsPadding'} style={this.state.themeCSS}>
                                 <AiFillReconciliation className='navBarIcon' size={25} />
                                 {this.state.valSideBar && "Project management"}
                             </div>
                         </Link>
                     </div>
-                    <div className={this.state.valSideBar ? 'body_left_margin_max body' : 'body_left_margin_min body2'}>
+                    <div className={this.state.valSideBar ? 'body_left_margin_max body' : 'body_left_margin_min body2'} style={this.state.themeCSS}>
                         {/* <Breadcrumb updatePathThroughProp={this.updatePath}  /> */}
                         {/* {this.props.children} */}
                         <Switch>
