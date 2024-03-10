@@ -173,10 +173,6 @@ const CommentSectionPage = ({ itemMasterID,
                 <h1 className="h1">{classMaster.itemName}</h1>
 
             </div>
-            <div className="descriptionCSP">
-                {/* <p>{this.props.classMaster['description']}</p> */}
-                {classMaster.description}
-            </div>
         </div>
         <div className="PlannerGraph">
             <PlannerGraph graphType={1} test={state['pgReRender']} itemMasterID={itemMasterIDLocal} />

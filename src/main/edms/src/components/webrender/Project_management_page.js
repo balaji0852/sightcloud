@@ -35,7 +35,7 @@ class ProjectManagementPage extends Component {
             },
 
             
-            themeid: params.get('themeid') ? params.get('themeid') : 1,
+            themeid: params.get('themeid') ? params.get('themeid') : this.props.state["userStore"]["themeID"],
             projectStoreID: params.get('projectStoreID') ? params.get('projectStoreID') : this.props.state["projectStoreID"],
             userStoreID: params.get('userStoreID') ? params.get('userStoreID') : this.props.state["userStoreID"]
         }
@@ -90,7 +90,7 @@ class ProjectManagementPage extends Component {
 
 
         return (
-            <div className={this.state.themeid==1?"PMPageDark PMPage":"PMPage "}>
+            <div className={this.state.themeid==1 ?"PMPageDark PMPage":"PMPage "}>
                 <div className="CFMW">
                     <div className="toggle">
                         <ToggleSwitch id="CFMW"

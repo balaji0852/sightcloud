@@ -26,16 +26,17 @@
     border-radius: 15px;
 }
 .PlannerGraph{
-    margin-top: 200px;
+    /* margin-top: 200px; */
     width: 100%;
 }
 
 .descriptionCSP{
+    display: none;
     display: flex;
     width: 95%;
-    height: 80px;
-    overflow-y: scroll;
-    /* height: fit-content; */
+    /* height: 80px; */
+    /* overflow-y: scroll; */
+    height: fit-content;
 }
 
 @media (max-width: 550px){

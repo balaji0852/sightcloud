@@ -153,7 +153,7 @@ class NavMenu extends Component {
                             </div>
                         </Link>
                     </div>
-                    <div className={this.state.valSideBar ? 'body_left_margin_max body' : 'body_left_margin_min body2'} style={this.state.themeCSS}>
+                    <div className={this.state.valSideBar ? 'body_left_margin_max bodyNav' : 'body_left_margin_min bodyNav2'} >
                         {/* <Breadcrumb updatePathThroughProp={this.updatePath}  /> */}
                         {/* {this.props.children} */}
                         <Switch>
@@ -161,7 +161,7 @@ class NavMenu extends Component {
                             <Route path="/dashboard/setting" component={Setting} />
                             <Route path="/dashboard/add" component={add} />
                             <Route path="/dashboard/class" component={classHome} />
-                            </Switch>
+                        </Switch>
                     </div>
                 </div>
             </div>

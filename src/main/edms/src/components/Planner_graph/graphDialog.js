@@ -17,7 +17,7 @@ class GraphDialog extends Component {
             
             themeID: this.props.state['userStore']['themeID'],
             themeCSS: {
-                color: this.props.state['userStore']['themeID'] == 1 ? "White" : "Black",
+                color: this.props.state['userStore']['themeID'] == 1   ? "White" : "Black",
                 backgroundColor: this.props.state['userStore']['themeID'] == 1 ? "Black" : "White",
                 Height: "100vh"
             }
@@ -62,7 +62,7 @@ class GraphDialog extends Component {
                     />
                 </div>
             </div>}
-            <div className={this.props.state['valSideBar'] ? 'body body-width1' : 'body body-width'}>{this.props.children}</div>
+            <div style={this.state.themeCSS} className={this.props.state['valSideBar'] ? 'bodyGD body-width1' : 'bodyGD body-width'}>{this.props.children }</div>
         </div>;
     }
 

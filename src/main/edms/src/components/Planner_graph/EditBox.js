@@ -37,9 +37,8 @@ class EditBox extends Component {
     //                     - adding type - 1 dispatch to store<-type-1 : pg-gd
     //pg.js - balaji : adding a function for cleanup/maniplt of store, with GD data
     stateCleanUpGraphDialog(stateLocal){
-        this.props.dispatch({ 
-            type: 'changeGraphDialog', 
-            payload: stateLocal});
+       
+        
     }
 
 

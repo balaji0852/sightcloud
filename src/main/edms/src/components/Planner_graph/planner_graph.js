@@ -86,7 +86,7 @@ class plannerGraph extends Component {
         // console.log("componentDidMount " + this.state);
         console.log(document.documentElement.scrollHeight)
         window.scrollTo({
-            top: (new Date().getHours() / 24) * 4500,
+            top: (new Date().getHours() / 24) * 2460,
             //  behavior: 'smooth',
         });
     }
@@ -216,7 +216,7 @@ class plannerGraph extends Component {
                     }
                 </div>
             </div>
-            <div className="planner-graph" style={this.state.themeCSS}>
+            <div className={this.props.graphType == 2 ? "planner-graph pg-padding-top":"planner-graph pg-padding-top-csp"}  style={this.state.themeCSS}>
                 <div className="time_column">
                     {this.hours.map((time, index) => {
                         return <div key={index * 2} className="time">{

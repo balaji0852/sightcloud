@@ -52,6 +52,7 @@
     "build": "react-scripts build"
   },
   "presets": [
+    
     [
       "@babel/preset-env",
       {

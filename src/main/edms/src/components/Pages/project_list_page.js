@@ -74,7 +74,7 @@ class ProjectList extends Component {
                         this.props.dispatch({ type: 'changeProject', payload: {projectStoreID:this.state.projectItems.at(0)['projectStoreID']} });
                     }
                     }} />
-                <h1>Projects</h1>
+                <h1 style={this.state.themeCSS}>Projects</h1>
             </div>
             <div className="create_project"><Button color="primary"
                 onClick={()=>{
