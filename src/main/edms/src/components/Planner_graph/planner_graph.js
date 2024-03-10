@@ -174,7 +174,7 @@ class plannerGraph extends Component {
 
     render() {
 
-        console.log(this.props.state);
+        
 
         return <div>
             <div className={this.props.graphType == 2 ? "mainToolbar" : "mainToolbarextended"} style={this.state.themeCSS}>
@@ -183,7 +183,8 @@ class plannerGraph extends Component {
                         <div>{ }</div>
                         <div className="dateViewLabel">filter</div>
                         <Input type="select" name="select" id="exampleSelect" onChange={
-                            this.setInstanceStatus.bind(this)} >
+                            this.setInstanceStatus.bind(this)} 
+                            style={this.state.themeCSS}>
                             <option value={0}>all</option>
                             <option value={3}>done</option>
                             <option value={1}>working</option>

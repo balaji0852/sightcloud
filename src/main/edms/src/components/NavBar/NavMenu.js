@@ -17,6 +17,8 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import GraphDialog from '../Planner_graph/graphDialog';
 import planBIcon from '../Pages/loaders/planb-icon.JPG'; 
+import planBIconDark from '../Pages/loaders/planb-icon-dark.JPG'; 
+
 import Project_management_page from '../webrender/Project_management_page.js';
 
 class NavMenu extends Component {
@@ -99,7 +101,7 @@ class NavMenu extends Component {
                 <div className='nav' style={this.state.themeCSS} >
                     {/* Date : 2/17/2022 adding the burger icon (lol) in navbar */}
                     {/* <AiOutlineMenu className='navBarIcon' size={30} onClick={this.manageSideBarContent.bind(this)} /> */}
-                    <img className="appLogo" src={planBIcon} onClick={this.manageSideBarContent.bind(this)}/>
+                    <img className="appLogo" src={this.state.themeCSS.color=='White'?planBIconDark:planBIcon} onClick={this.manageSideBarContent.bind(this)}/>
                     <h2>planB</h2>
                     <div className="navRight">
                         {this.props.state.userStore.photoURL!="empty" && <img className="dataInstancesUserIcon" src={this.props.state.userStore.photoURL}/>}

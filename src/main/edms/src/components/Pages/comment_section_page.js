@@ -27,6 +27,11 @@ const CommentSectionPage = ({ itemMasterID,
     const [editBoxState, SetEditBoxState] = useState(false);
     const [pgReRender, setPGReRender] = useState(1);
     const [showdescription, setDescription] = useState(false);
+    const [themeCSS,setthemeCSS] = useState({
+        color:state['userStore']['themeID']==1 ?"White":"Black",
+        backgroundColor:state['userStore']['themeID']==1 ?"Black":"White",
+    })
+    
     //balaji:fix for handling empty props
     useEffect(() => {
         if (itemMasterID === 'empty' || itemMasterID === 0) {
@@ -158,9 +163,11 @@ const CommentSectionPage = ({ itemMasterID,
             payload: stateLocal
         });
     }
-
-    return (<div className='project'>
-        <div className='head'>
+    console.log(themeCSS)
+    return (<div 
+        // className='project'
+    style={themeCSS}>
+        <div className='head'  style={themeCSS}>
             <div className='header'>
                 {/* <Link className="link" to='/dashboard/home'> */}
                 {/* onClick={()=> window.location.href='#/dashboard/home'} */}

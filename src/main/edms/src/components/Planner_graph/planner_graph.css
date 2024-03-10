@@ -19,11 +19,7 @@
 
 
 .planner-graph{
-    
-    /* height: 400px; */
     display: flex;
-    /* overflow-y: scroll; */
-    /* 16/8/2022 moved width from vw to % */
     width: 100%;
 }
 
